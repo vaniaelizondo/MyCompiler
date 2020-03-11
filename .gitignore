@@ -123,3 +123,11 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# ply libraries files
+/parser.out
+/parsetab.py
+__pycache__
+
+# MacOS
+.DS_Store
