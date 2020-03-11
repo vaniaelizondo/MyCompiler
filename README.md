@@ -2,14 +2,14 @@
 
 For my Computer Languages and Translators course I developed my own compiler in Python 3 using the *ply* library. 
 The scope of the language is to perform simple mathematical equations, consequently, the language only accepts:
--Global variables 
--Variables type integer or real
--One or two dimensional variables
--Subroutines
--Arithmetic operations following natural order of execution ((), *, /, +, -)
--Logical operations following order of execution (not, and, or)
--Comparison operations with equal order of execution (<, >, <=, >=, ==, !=) 
--Statutes:
+- Global variables 
+- Variables type integer or real
+- One or two dimensional variables
+- Subroutines
+- Arithmetic operations following natural order of execution ((), *, /, +, -)
+- Logical operations following order of execution (not, and, or)
+- Comparison operations with equal order of execution (<, >, <=, >=, ==, !=) 
+- Statutes:
 	- read
 	- print
 	- call
