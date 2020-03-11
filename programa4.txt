@@ -1,0 +1,42 @@
+program numeros
+	integer num, repeat
+    subroutine leerNumero
+        do
+            print -> "Escribe un numero entre 0 y 7"
+            read -> num
+            if num >= 0 and num <= 7 then
+                exit
+            end               
+        end
+    end 
+	subroutine imprimirNumero
+		if num == 0 then
+			print -> "cero"
+		elsif num == 1 then
+			print -> "uno"
+		elsif num == 2 then
+			print -> "dos"
+		elsif num == 3 then
+			print -> "tres"
+		elsif num == 4 then
+			print -> "cuatro"
+		elsif num == 5 then
+			print -> "cinco"
+		elsif num == 6 then
+			print -> "seis"
+		elsif num == 7 then
+			print -> "siete"
+		end
+	end
+	begin
+		do
+			call leerNumero()
+			call imprimirNumero()
+			print -> "¿Elegir otro numero? 1) Sí 2) No"
+			read -> repeat
+			if repeat != 1 then
+				exit
+			end
+		end
+	end
+end

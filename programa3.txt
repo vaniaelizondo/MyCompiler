@@ -1,0 +1,72 @@
+program menuVariablesSimples	
+    integer i, j, k, x, y, menu, repeat, res
+    real num, den, rRes
+    subroutine menu1
+        print -> "Escribe valor de X: "
+        read -> x
+        res = 1
+        do i = 1, x
+            res = i * res
+        end            
+        print -> "X! -> "
+        print -> res
+    end
+    subroutine menu2        
+        print -> "Escribe valor de X: "
+        read -> x
+        print -> "Escribe valor de Y: "
+        read -> y
+        res = 1
+        do i = 1,y
+            res = x * res
+        end            
+        print -> "X^Y! -> "
+        print -> res
+    end
+    subroutine menu3   
+        print -> "Escribe valor de X: "
+        read -> x
+        rRes = 1
+        #  0! = 1    1! = 1
+        # 0^0 = 1   1^1 = 1
+        # e^0 = 1   e^1 = 2.7182
+        do y = 1,10
+            num = 1
+            den = 1
+            do j = 1,y
+                num = x * num
+            end
+            do k = 1,y
+                den = k * den
+            end
+            rRes = rRes + (num / den)
+        end          
+        print -> "e^X -> "
+        print -> rRes
+    end 
+    begin 
+        do
+            print -> "Seleccione una opción:"
+            print -> "1) Leer y calcular X!"
+            print -> "2) Leer X, Y y calcular X^Y"
+            print -> "3) Leer X y calcular e^X bajo la sumatoria de Taylor"
+            read -> menu
+            if menu == 1 then
+                call menu1()
+            elsif menu == 2 then
+                call menu2()
+            elsif menu == 3 then
+                call menu3()
+            end
+            if menu != 1 and menu != 2 and menu != 3 then
+                exit
+            else
+                print -> "¿Realizar otro cálculo? 1) Sí 2) No"
+                read -> repeat
+                if repeat != 1 then
+                    exit
+                end
+            end
+        end
+    end
+end

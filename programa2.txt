@@ -1,0 +1,52 @@
+program vector
+	integer tam, nt, i, x, repeat, aux, v(10)
+    subroutine tamañoVector
+        do
+            print -> "Escribe el tamaño del vector"
+            read -> tam
+            if tam > 0 and tam <= 10 then
+                exit
+            end               
+        end
+    end 
+    subroutine rellenarVector
+		do i = 1, tam
+			print -> "Valor para posicion"
+			print -> i
+			read -> x
+			v(i) = x
+		end 
+    end 
+	subroutine sortVector
+		nt = tam - 1
+		do x = 1, tam
+			do i = 1, nt
+				if v(i) > v(i+1) then
+					aux = v(i)
+					v(i) = v(i+1)
+					v(i+1) = aux
+				end
+			end
+		end
+	end
+	subroutine printVector
+		do i = 1, tam
+			print -> "Posicion"
+			print -> i
+			print -> v(i)
+		end
+	end
+	begin
+		do
+			call tamañoVector()
+			call rellenarVector()
+			call sortVector()
+			call printVector()
+			print -> "¿Ordenar otro vector? 1) Sí 2) No"
+			read -> repeat
+            if repeat != 1 then
+                exit
+            end
+		end
+	end
+end

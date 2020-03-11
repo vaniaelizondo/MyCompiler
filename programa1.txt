@@ -1,0 +1,188 @@
+program matrices	
+    integer renA, colA, renB, colB, menu, repeat, i, j, k, iA, iB, iRes, temp
+    integer v(2), matA(5,5), matB(5,5), matC(5,5)
+    subroutine tamañoRenglonesA
+        do
+            print -> "Escribe el numero de renglones de la matriz A"
+            read -> renA
+            if renA > 0 and renA <= 5 then
+                exit
+            end               
+        end
+    end 
+    subroutine tamañoRenglonesB
+        do
+            print -> "Escribe el numero de renglones de la matriz B"
+            read -> renB
+            if renB > 0 and renB <= 5 then
+                exit
+            end               
+        end
+    end 
+    subroutine tamañoColumnasA
+        do
+            print -> "Escribe el numero de columnas de la matriz A"
+            read -> colA
+            if colA > 0 and colA <= 5 then
+                exit
+            end               
+        end
+    end 
+    subroutine tamañoColumnasB
+        do
+            print -> "Escribe el numero de columnas de la matriz B"
+            read -> colB
+            if colB > 0 and colB <= 5 then
+                exit
+            end               
+        end
+    end 
+    subroutine comparaRenglones
+        do
+            if renA != renB then 
+                print -> "Escriba tamaño de renglones iguales"
+                call tamañoRenglonesA()
+                call tamañoRenglonesB()
+            else
+                exit
+            end 
+        end
+    end 
+    subroutine comparaColumnas
+        do
+            if colA != colB then 
+                print -> "Escriba tamaño de columnas iguales"
+                call tamañoColumnasA()
+                call tamañoColumnasB()
+            else
+                exit
+            end 
+        end
+    end 
+    subroutine comparaMultiplicacion
+        do
+            if colA != renB then 
+                print -> "Columna A y Renglón B diferentes"
+                call tamañoColumnasA()
+                call tamañoRenglonesA()
+                call tamañoColumnasB()
+                call tamañoRenglonesB()
+            else
+                exit
+            end 
+        end
+    end 
+    subroutine rellenarMatrizA
+        do i = 1,renA
+            print -> "Renglón"
+            print -> i
+            do j = 1, colA
+                print -> "Columna"
+                print -> j 
+                print -> "Valor para matriz A:"
+                read -> iA
+                matA(i,j) = iA
+            end 
+        end 
+    end 
+    subroutine rellenarMatrizB
+        do i = 1, renB
+            print -> "Renglón"
+            print -> i
+            do j = 1, colB
+                print -> "Columna"
+                print -> j 
+                print -> "Valor para matriz B:"
+                read -> iB
+                matB(i,j) = iB
+            end 
+        end 
+    end 
+    subroutine rellenarMatrizC
+        do i = 1, renA
+            do j = 1, colB
+                matC(i,j) = 0
+            end 
+        end 
+    end 
+    subroutine multiplicacionMatrices
+        do i = 1, renA
+            do j = 1, colB
+                do k = 1, colA
+                    matC(i,j) = matC(i,j) + matA(i,k) * matB(k,j)
+                end
+            end 
+        end 
+    end
+    subroutine sumatoriaMatrices
+        do i = 1, renB
+            do j = 1, colB
+                matC(i,j) = matA(i,j) + matB(i,j)
+            end 
+        end 
+    end 
+    subroutine imprimirResultadoSumatoria
+        print -> "Resultado de Matriz C:"
+        do i = 1, renB
+            print -> "Renglón"
+            print -> i
+            do j = 1, colB
+                print -> "Columna"
+                print -> j 
+                print -> matC(i,j)
+            end 
+        end 
+    end 
+    subroutine imprimirResultadoMultiplicacion
+        print -> "Resultado de Matriz C:"
+        do i = 1, renA
+            print -> "Renglón"
+            print -> i
+            do j = 1, colB
+                print -> "Columna"
+                print -> j 
+                print -> matC(i,j)
+            end 
+        end 
+    end 
+    begin
+        do
+            print -> "Seleccione opción a realizar:"
+            print -> "1) Sumatoria de matrices"
+            print -> "2) Multiplicación de matrices "
+            read -> menu
+            if menu == 1 then
+                call tamañoRenglonesA()
+                call tamañoRenglonesB()
+                call comparaRenglones()
+                call tamañoColumnasA()
+                call tamañoColumnasB()
+                call comparaColumnas()
+                call rellenarMatrizA()
+                call rellenarMatrizB()
+                call sumatoriaMatrices()
+                call imprimirResultadoSumatoria()
+            elsif menu == 2 then
+                call tamañoRenglonesA()
+                call tamañoColumnasA()
+                call tamañoRenglonesB()
+                call tamañoColumnasB()
+                call comparaMultiplicacion()
+                call rellenarMatrizA()
+                call rellenarMatrizB()
+                call rellenarMatrizC()
+                call multiplicacionMatrices()
+                call imprimirResultadoMultiplicacion()
+            end
+            if menu != 1 and menu != 2 then
+                exit
+            else
+                print -> "¿Realizar otro cálculo? 1) Sí 2) No"
+                read -> repeat
+                if repeat != 1 then
+                    exit
+                end
+            end
+        end
+    end
+end 

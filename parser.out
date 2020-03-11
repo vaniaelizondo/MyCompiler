@@ -1,0 +1,3265 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> programa
+Rule 1     programa -> doprogram ID var rut main END
+Rule 2     doprogram -> PROGRAM
+Rule 3     main -> BEGIN est END
+Rule 4     var -> v
+Rule 5     var -> var v
+Rule 6     rut -> r
+Rule 7     rut -> rut r
+Rule 8     rut -> empty
+Rule 9     empty -> <empty>
+Rule 10    v -> INTEGER c1
+Rule 11    v -> REAL c1
+Rule 12    c1 -> ID
+Rule 13    c1 -> c1 , ID
+Rule 14    c1 -> ID LPAREN CTE RPAREN
+Rule 15    c1 -> c1 , ID LPAREN CTE RPAREN
+Rule 16    c1 -> ID LPAREN CTE , CTE RPAREN
+Rule 17    c1 -> c1 , ID LPAREN CTE , CTE RPAREN
+Rule 18    r -> SUBROUTINE idsubroutine est END
+Rule 19    idsubroutine -> ID
+Rule 20    s -> CALL ID LPAREN RPAREN
+Rule 21    est -> s
+Rule 22    est -> est s
+Rule 23    iddim -> pushid LPAREN ea RPAREN
+Rule 24    iddim -> pushid LPAREN ea , ea RPAREN
+Rule 25    printiddim -> pushid LPAREN ea RPAREN
+Rule 26    printiddim -> pushid LPAREN ea , ea RPAREN
+Rule 27    s -> pushid = ea
+Rule 28    s -> iddim = ea
+Rule 29    pushid -> ID
+Rule 30    s -> READ FLECHA ID
+Rule 31    s -> PRINT FLECHA TEXT
+Rule 32    s -> PRINT FLECHA checkid
+Rule 33    checkid -> ID
+Rule 34    checkid -> printiddim
+Rule 35    s -> estif c2 estelse est END
+Rule 36    s -> estif c2 END
+Rule 37    estif -> IF
+Rule 38    c2 -> el estthen est
+Rule 39    c2 -> c2 estelsif el estthen est
+Rule 40    estthen -> THEN
+Rule 41    estelse -> ELSE
+Rule 42    estelsif -> ELSIF
+Rule 43    s -> DO pushid = first , last , increment est END
+Rule 44    s -> DO pushid = first , last est END
+Rule 45    s -> estdo est END
+Rule 46    s -> EXIT
+Rule 47    estdo -> DO
+Rule 48    first -> cteid
+Rule 49    cteid -> pushid
+Rule 50    cteid -> pushcte
+Rule 51    last -> cteid
+Rule 52    increment -> pushcte
+Rule 53    ea -> md
+Rule 54    ea -> ea hacesuma md
+Rule 55    hacesuma -> SUMA
+Rule 56    ea -> ea haceresta md
+Rule 57    haceresta -> RESTA
+Rule 58    md -> exp
+Rule 59    md -> md hacemult exp
+Rule 60    hacemult -> MULTIPLICACION
+Rule 61    md -> md hacediv exp
+Rule 62    hacediv -> DIVISION
+Rule 63    exp -> pushid
+Rule 64    exp -> iddim
+Rule 65    exp -> pushcte
+Rule 66    pushcte -> CTE
+Rule 67    exp -> parenIZQ ea parenDER
+Rule 68    parenIZQ -> LPAREN
+Rule 69    parenDER -> RPAREN
+Rule 70    el -> eand
+Rule 71    el -> el haceor eand
+Rule 72    haceor -> OR
+Rule 73    eand -> enot
+Rule 74    eand -> eand haceand enot
+Rule 75    haceand -> AND
+Rule 76    enot -> er
+Rule 77    enot -> hacenot pushid
+Rule 78    hacenot -> NOT
+Rule 79    er -> parenIZQ el parenDER
+Rule 80    er -> c4 hacemenor c5
+Rule 81    hacemenor -> MENOR
+Rule 82    er -> c4 hacemenorigual c5
+Rule 83    hacemenorigual -> MENOR_IGUAL
+Rule 84    er -> c4 hacemayor c5
+Rule 85    hacemayor -> MAYOR
+Rule 86    er -> c4 hacemayorigual c5
+Rule 87    hacemayorigual -> MAYOR_IGUAL
+Rule 88    er -> c4 haceigual c5
+Rule 89    haceigual -> IGUAL
+Rule 90    er -> c4 hacedesigual c5
+Rule 91    hacedesigual -> DESIGUAL
+Rule 92    c4 -> pushid
+Rule 93    c4 -> iddim
+Rule 94    c5 -> c4
+Rule 95    c5 -> pushcte
+
+Terminals, with rules where they appear
+
+,                    : 13 15 16 17 17 24 26 43 43 44
+=                    : 27 28 43 44
+AND                  : 75
+BEGIN                : 3
+CALL                 : 20
+CTE                  : 14 15 16 16 17 17 66
+DESIGUAL             : 91
+DIVISION             : 62
+DO                   : 43 44 47
+ELSE                 : 41
+ELSIF                : 42
+END                  : 1 3 18 35 36 43 44 45
+EXIT                 : 46
+FLECHA               : 30 31 32
+ID                   : 1 12 13 14 15 16 17 19 20 29 30 33
+IF                   : 37
+IGUAL                : 89
+INTEGER              : 10
+LPAREN               : 14 15 16 17 20 23 24 25 26 68
+MAYOR                : 85
+MAYOR_IGUAL          : 87
+MENOR                : 81
+MENOR_IGUAL          : 83
+MULTIPLICACION       : 60
+NOT                  : 78
+OR                   : 72
+PRINT                : 31 32
+PROGRAM              : 2
+READ                 : 30
+REAL                 : 11
+RESTA                : 57
+RPAREN               : 14 15 16 17 20 23 24 25 26 69
+SUBROUTINE           : 18
+SUMA                 : 55
+TEXT                 : 31
+THEN                 : 40
+error                : 
+
+Nonterminals, with rules where they appear
+
+c1                   : 10 11 13 15 17
+c2                   : 35 36 39
+c4                   : 80 82 84 86 88 90 94
+c5                   : 80 82 84 86 88 90
+checkid              : 32
+cteid                : 48 51
+doprogram            : 1
+ea                   : 23 24 24 25 26 26 27 28 54 56 67
+eand                 : 70 71 74
+el                   : 38 39 71 79
+empty                : 8
+enot                 : 73 74
+er                   : 76
+est                  : 3 18 22 35 38 39 43 44 45
+estdo                : 45
+estelse              : 35
+estelsif             : 39
+estif                : 35 36
+estthen              : 38 39
+exp                  : 58 59 61
+first                : 43 44
+haceand              : 74
+hacedesigual         : 90
+hacediv              : 61
+haceigual            : 88
+hacemayor            : 84
+hacemayorigual       : 86
+hacemenor            : 80
+hacemenorigual       : 82
+hacemult             : 59
+hacenot              : 77
+haceor               : 71
+haceresta            : 56
+hacesuma             : 54
+iddim                : 28 64 93
+idsubroutine         : 18
+increment            : 43
+last                 : 43 44
+main                 : 1
+md                   : 53 54 56 59 61
+parenDER             : 67 79
+parenIZQ             : 67 79
+printiddim           : 34
+programa             : 0
+pushcte              : 50 52 65 95
+pushid               : 23 24 25 26 27 43 44 49 63 77 92
+r                    : 6 7
+rut                  : 1 7
+s                    : 21 22
+v                    : 4 5
+var                  : 1 5
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . programa
+    (1) programa -> . doprogram ID var rut main END
+    (2) doprogram -> . PROGRAM
+
+    PROGRAM         shift and go to state 3
+
+    programa                       shift and go to state 1
+    doprogram                      shift and go to state 2
+
+state 1
+
+    (0) S' -> programa .
+
+
+
+state 2
+
+    (1) programa -> doprogram . ID var rut main END
+
+    ID              shift and go to state 4
+
+
+state 3
+
+    (2) doprogram -> PROGRAM .
+
+    ID              reduce using rule 2 (doprogram -> PROGRAM .)
+
+
+state 4
+
+    (1) programa -> doprogram ID . var rut main END
+    (4) var -> . v
+    (5) var -> . var v
+    (10) v -> . INTEGER c1
+    (11) v -> . REAL c1
+
+    INTEGER         shift and go to state 7
+    REAL            shift and go to state 8
+
+    var                            shift and go to state 5
+    v                              shift and go to state 6
+
+state 5
+
+    (1) programa -> doprogram ID var . rut main END
+    (5) var -> var . v
+    (6) rut -> . r
+    (7) rut -> . rut r
+    (8) rut -> . empty
+    (10) v -> . INTEGER c1
+    (11) v -> . REAL c1
+    (18) r -> . SUBROUTINE idsubroutine est END
+    (9) empty -> .
+
+  ! shift/reduce conflict for SUBROUTINE resolved as shift
+    INTEGER         shift and go to state 7
+    REAL            shift and go to state 8
+    SUBROUTINE      shift and go to state 13
+    BEGIN           reduce using rule 9 (empty -> .)
+
+  ! SUBROUTINE      [ reduce using rule 9 (empty -> .) ]
+
+    rut                            shift and go to state 9
+    v                              shift and go to state 10
+    r                              shift and go to state 11
+    empty                          shift and go to state 12
+
+state 6
+
+    (4) var -> v .
+
+    INTEGER         reduce using rule 4 (var -> v .)
+    REAL            reduce using rule 4 (var -> v .)
+    SUBROUTINE      reduce using rule 4 (var -> v .)
+    BEGIN           reduce using rule 4 (var -> v .)
+
+
+state 7
+
+    (10) v -> INTEGER . c1
+    (12) c1 -> . ID
+    (13) c1 -> . c1 , ID
+    (14) c1 -> . ID LPAREN CTE RPAREN
+    (15) c1 -> . c1 , ID LPAREN CTE RPAREN
+    (16) c1 -> . ID LPAREN CTE , CTE RPAREN
+    (17) c1 -> . c1 , ID LPAREN CTE , CTE RPAREN
+
+    ID              shift and go to state 15
+
+    c1                             shift and go to state 14
+
+state 8
+
+    (11) v -> REAL . c1
+    (12) c1 -> . ID
+    (13) c1 -> . c1 , ID
+    (14) c1 -> . ID LPAREN CTE RPAREN
+    (15) c1 -> . c1 , ID LPAREN CTE RPAREN
+    (16) c1 -> . ID LPAREN CTE , CTE RPAREN
+    (17) c1 -> . c1 , ID LPAREN CTE , CTE RPAREN
+
+    ID              shift and go to state 15
+
+    c1                             shift and go to state 16
+
+state 9
+
+    (1) programa -> doprogram ID var rut . main END
+    (7) rut -> rut . r
+    (3) main -> . BEGIN est END
+    (18) r -> . SUBROUTINE idsubroutine est END
+
+    BEGIN           shift and go to state 19
+    SUBROUTINE      shift and go to state 13
+
+    main                           shift and go to state 17
+    r                              shift and go to state 18
+
+state 10
+
+    (5) var -> var v .
+
+    INTEGER         reduce using rule 5 (var -> var v .)
+    REAL            reduce using rule 5 (var -> var v .)
+    SUBROUTINE      reduce using rule 5 (var -> var v .)
+    BEGIN           reduce using rule 5 (var -> var v .)
+
+
+state 11
+
+    (6) rut -> r .
+
+    BEGIN           reduce using rule 6 (rut -> r .)
+    SUBROUTINE      reduce using rule 6 (rut -> r .)
+
+
+state 12
+
+    (8) rut -> empty .
+
+    BEGIN           reduce using rule 8 (rut -> empty .)
+    SUBROUTINE      reduce using rule 8 (rut -> empty .)
+
+
+state 13
+
+    (18) r -> SUBROUTINE . idsubroutine est END
+    (19) idsubroutine -> . ID
+
+    ID              shift and go to state 21
+
+    idsubroutine                   shift and go to state 20
+
+state 14
+
+    (10) v -> INTEGER c1 .
+    (13) c1 -> c1 . , ID
+    (15) c1 -> c1 . , ID LPAREN CTE RPAREN
+    (17) c1 -> c1 . , ID LPAREN CTE , CTE RPAREN
+
+    INTEGER         reduce using rule 10 (v -> INTEGER c1 .)
+    REAL            reduce using rule 10 (v -> INTEGER c1 .)
+    SUBROUTINE      reduce using rule 10 (v -> INTEGER c1 .)
+    BEGIN           reduce using rule 10 (v -> INTEGER c1 .)
+    ,               shift and go to state 22
+
+
+state 15
+
+    (12) c1 -> ID .
+    (14) c1 -> ID . LPAREN CTE RPAREN
+    (16) c1 -> ID . LPAREN CTE , CTE RPAREN
+
+    ,               reduce using rule 12 (c1 -> ID .)
+    INTEGER         reduce using rule 12 (c1 -> ID .)
+    REAL            reduce using rule 12 (c1 -> ID .)
+    SUBROUTINE      reduce using rule 12 (c1 -> ID .)
+    BEGIN           reduce using rule 12 (c1 -> ID .)
+    LPAREN          shift and go to state 23
+
+
+state 16
+
+    (11) v -> REAL c1 .
+    (13) c1 -> c1 . , ID
+    (15) c1 -> c1 . , ID LPAREN CTE RPAREN
+    (17) c1 -> c1 . , ID LPAREN CTE , CTE RPAREN
+
+    INTEGER         reduce using rule 11 (v -> REAL c1 .)
+    REAL            reduce using rule 11 (v -> REAL c1 .)
+    SUBROUTINE      reduce using rule 11 (v -> REAL c1 .)
+    BEGIN           reduce using rule 11 (v -> REAL c1 .)
+    ,               shift and go to state 22
+
+
+state 17
+
+    (1) programa -> doprogram ID var rut main . END
+
+    END             shift and go to state 24
+
+
+state 18
+
+    (7) rut -> rut r .
+
+    BEGIN           reduce using rule 7 (rut -> rut r .)
+    SUBROUTINE      reduce using rule 7 (rut -> rut r .)
+
+
+state 19
+
+    (3) main -> BEGIN . est END
+    (21) est -> . s
+    (22) est -> . est s
+    (20) s -> . CALL ID LPAREN RPAREN
+    (27) s -> . pushid = ea
+    (28) s -> . iddim = ea
+    (30) s -> . READ FLECHA ID
+    (31) s -> . PRINT FLECHA TEXT
+    (32) s -> . PRINT FLECHA checkid
+    (35) s -> . estif c2 estelse est END
+    (36) s -> . estif c2 END
+    (43) s -> . DO pushid = first , last , increment est END
+    (44) s -> . DO pushid = first , last est END
+    (45) s -> . estdo est END
+    (46) s -> . EXIT
+    (29) pushid -> . ID
+    (23) iddim -> . pushid LPAREN ea RPAREN
+    (24) iddim -> . pushid LPAREN ea , ea RPAREN
+    (37) estif -> . IF
+    (47) estdo -> . DO
+
+    CALL            shift and go to state 27
+    READ            shift and go to state 31
+    PRINT           shift and go to state 32
+    DO              shift and go to state 34
+    EXIT            shift and go to state 36
+    ID              shift and go to state 28
+    IF              shift and go to state 37
+
+    est                            shift and go to state 25
+    s                              shift and go to state 26
+    pushid                         shift and go to state 29
+    iddim                          shift and go to state 30
+    estif                          shift and go to state 33
+    estdo                          shift and go to state 35
+
+state 20
+
+    (18) r -> SUBROUTINE idsubroutine . est END
+    (21) est -> . s
+    (22) est -> . est s
+    (20) s -> . CALL ID LPAREN RPAREN
+    (27) s -> . pushid = ea
+    (28) s -> . iddim = ea
+    (30) s -> . READ FLECHA ID
+    (31) s -> . PRINT FLECHA TEXT
+    (32) s -> . PRINT FLECHA checkid
+    (35) s -> . estif c2 estelse est END
+    (36) s -> . estif c2 END
+    (43) s -> . DO pushid = first , last , increment est END
+    (44) s -> . DO pushid = first , last est END
+    (45) s -> . estdo est END
+    (46) s -> . EXIT
+    (29) pushid -> . ID
+    (23) iddim -> . pushid LPAREN ea RPAREN
+    (24) iddim -> . pushid LPAREN ea , ea RPAREN
+    (37) estif -> . IF
+    (47) estdo -> . DO
+
+    CALL            shift and go to state 27
+    READ            shift and go to state 31
+    PRINT           shift and go to state 32
+    DO              shift and go to state 34
+    EXIT            shift and go to state 36
+    ID              shift and go to state 28
+    IF              shift and go to state 37
+
+    est                            shift and go to state 38
+    s                              shift and go to state 26
+    pushid                         shift and go to state 29
+    iddim                          shift and go to state 30
+    estif                          shift and go to state 33
+    estdo                          shift and go to state 35
+
+state 21
+
+    (19) idsubroutine -> ID .
+
+    CALL            reduce using rule 19 (idsubroutine -> ID .)
+    READ            reduce using rule 19 (idsubroutine -> ID .)
+    PRINT           reduce using rule 19 (idsubroutine -> ID .)
+    DO              reduce using rule 19 (idsubroutine -> ID .)
+    EXIT            reduce using rule 19 (idsubroutine -> ID .)
+    ID              reduce using rule 19 (idsubroutine -> ID .)
+    IF              reduce using rule 19 (idsubroutine -> ID .)
+
+
+state 22
+
+    (13) c1 -> c1 , . ID
+    (15) c1 -> c1 , . ID LPAREN CTE RPAREN
+    (17) c1 -> c1 , . ID LPAREN CTE , CTE RPAREN
+
+    ID              shift and go to state 39
+
+
+state 23
+
+    (14) c1 -> ID LPAREN . CTE RPAREN
+    (16) c1 -> ID LPAREN . CTE , CTE RPAREN
+
+    CTE             shift and go to state 40
+
+
+state 24
+
+    (1) programa -> doprogram ID var rut main END .
+
+    $end            reduce using rule 1 (programa -> doprogram ID var rut main END .)
+
+
+state 25
+
+    (3) main -> BEGIN est . END
+    (22) est -> est . s
+    (20) s -> . CALL ID LPAREN RPAREN
+    (27) s -> . pushid = ea
+    (28) s -> . iddim = ea
+    (30) s -> . READ FLECHA ID
+    (31) s -> . PRINT FLECHA TEXT
+    (32) s -> . PRINT FLECHA checkid
+    (35) s -> . estif c2 estelse est END
+    (36) s -> . estif c2 END
+    (43) s -> . DO pushid = first , last , increment est END
+    (44) s -> . DO pushid = first , last est END
+    (45) s -> . estdo est END
+    (46) s -> . EXIT
+    (29) pushid -> . ID
+    (23) iddim -> . pushid LPAREN ea RPAREN
+    (24) iddim -> . pushid LPAREN ea , ea RPAREN
+    (37) estif -> . IF
+    (47) estdo -> . DO
+
+    END             shift and go to state 41
+    CALL            shift and go to state 27
+    READ            shift and go to state 31
+    PRINT           shift and go to state 32
+    DO              shift and go to state 34
+    EXIT            shift and go to state 36
+    ID              shift and go to state 28
+    IF              shift and go to state 37
+
+    s                              shift and go to state 42
+    pushid                         shift and go to state 29
+    iddim                          shift and go to state 30
+    estif                          shift and go to state 33
+    estdo                          shift and go to state 35
+
+state 26
+
+    (21) est -> s .
+
+    END             reduce using rule 21 (est -> s .)
+    CALL            reduce using rule 21 (est -> s .)
+    READ            reduce using rule 21 (est -> s .)
+    PRINT           reduce using rule 21 (est -> s .)
+    DO              reduce using rule 21 (est -> s .)
+    EXIT            reduce using rule 21 (est -> s .)
+    ID              reduce using rule 21 (est -> s .)
+    IF              reduce using rule 21 (est -> s .)
+    ELSE            reduce using rule 21 (est -> s .)
+    ELSIF           reduce using rule 21 (est -> s .)
+
+
+state 27
+
+    (20) s -> CALL . ID LPAREN RPAREN
+
+    ID              shift and go to state 43
+
+
+state 28
+
+    (29) pushid -> ID .
+
+    =               reduce using rule 29 (pushid -> ID .)
+    LPAREN          reduce using rule 29 (pushid -> ID .)
+    MENOR           reduce using rule 29 (pushid -> ID .)
+    MENOR_IGUAL     reduce using rule 29 (pushid -> ID .)
+    MAYOR           reduce using rule 29 (pushid -> ID .)
+    MAYOR_IGUAL     reduce using rule 29 (pushid -> ID .)
+    IGUAL           reduce using rule 29 (pushid -> ID .)
+    DESIGUAL        reduce using rule 29 (pushid -> ID .)
+    MULTIPLICACION  reduce using rule 29 (pushid -> ID .)
+    DIVISION        reduce using rule 29 (pushid -> ID .)
+    SUMA            reduce using rule 29 (pushid -> ID .)
+    RESTA           reduce using rule 29 (pushid -> ID .)
+    END             reduce using rule 29 (pushid -> ID .)
+    CALL            reduce using rule 29 (pushid -> ID .)
+    READ            reduce using rule 29 (pushid -> ID .)
+    PRINT           reduce using rule 29 (pushid -> ID .)
+    DO              reduce using rule 29 (pushid -> ID .)
+    EXIT            reduce using rule 29 (pushid -> ID .)
+    ID              reduce using rule 29 (pushid -> ID .)
+    IF              reduce using rule 29 (pushid -> ID .)
+    ELSE            reduce using rule 29 (pushid -> ID .)
+    ELSIF           reduce using rule 29 (pushid -> ID .)
+    RPAREN          reduce using rule 29 (pushid -> ID .)
+    ,               reduce using rule 29 (pushid -> ID .)
+    AND             reduce using rule 29 (pushid -> ID .)
+    THEN            reduce using rule 29 (pushid -> ID .)
+    OR              reduce using rule 29 (pushid -> ID .)
+
+
+state 29
+
+    (27) s -> pushid . = ea
+    (23) iddim -> pushid . LPAREN ea RPAREN
+    (24) iddim -> pushid . LPAREN ea , ea RPAREN
+
+    =               shift and go to state 44
+    LPAREN          shift and go to state 45
+
+
+state 30
+
+    (28) s -> iddim . = ea
+
+    =               shift and go to state 46
+
+
+state 31
+
+    (30) s -> READ . FLECHA ID
+
+    FLECHA          shift and go to state 47
+
+
+state 32
+
+    (31) s -> PRINT . FLECHA TEXT
+    (32) s -> PRINT . FLECHA checkid
+
+    FLECHA          shift and go to state 48
+
+
+state 33
+
+    (35) s -> estif . c2 estelse est END
+    (36) s -> estif . c2 END
+    (38) c2 -> . el estthen est
+    (39) c2 -> . c2 estelsif el estthen est
+    (70) el -> . eand
+    (71) el -> . el haceor eand
+    (73) eand -> . enot
+    (74) eand -> . eand haceand enot
+    (76) enot -> . er
+    (77) enot -> . hacenot pushid
+    (79) er -> . parenIZQ el parenDER
+    (80) er -> . c4 hacemenor c5
+    (82) er -> . c4 hacemenorigual c5
+    (84) er -> . c4 hacemayor c5
+    (86) er -> . c4 hacemayorigual c5
+    (88) er -> . c4 haceigual c5
+    (90) er -> . c4 hacedesigual c5
+    (78) hacenot -> . NOT
+    (68) parenIZQ -> . LPAREN
+    (92) c4 -> . pushid
+    (93) c4 -> . iddim
+    (29) pushid -> . ID
+    (23) iddim -> . pushid LPAREN ea RPAREN
+    (24) iddim -> . pushid LPAREN ea , ea RPAREN
+
+    NOT             shift and go to state 58
+    LPAREN          shift and go to state 59
+    ID              shift and go to state 28
+
+    c2                             shift and go to state 49
+    el                             shift and go to state 50
+    eand                           shift and go to state 51
+    enot                           shift and go to state 52
+    er                             shift and go to state 53
+    hacenot                        shift and go to state 54
+    pushid                         shift and go to state 55
+    parenIZQ                       shift and go to state 56
+    c4                             shift and go to state 57
+    iddim                          shift and go to state 60
+
+state 34
+
+    (43) s -> DO . pushid = first , last , increment est END
+    (44) s -> DO . pushid = first , last est END
+    (47) estdo -> DO .
+    (29) pushid -> . ID
+
+  ! shift/reduce conflict for ID resolved as shift
+    CALL            reduce using rule 47 (estdo -> DO .)
+    READ            reduce using rule 47 (estdo -> DO .)
+    PRINT           reduce using rule 47 (estdo -> DO .)
+    DO              reduce using rule 47 (estdo -> DO .)
+    EXIT            reduce using rule 47 (estdo -> DO .)
+    IF              reduce using rule 47 (estdo -> DO .)
+    ID              shift and go to state 28
+
+  ! ID              [ reduce using rule 47 (estdo -> DO .) ]
+
+    pushid                         shift and go to state 61
+
+state 35
+
+    (45) s -> estdo . est END
+    (21) est -> . s
+    (22) est -> . est s
+    (20) s -> . CALL ID LPAREN RPAREN
+    (27) s -> . pushid = ea
+    (28) s -> . iddim = ea
+    (30) s -> . READ FLECHA ID
+    (31) s -> . PRINT FLECHA TEXT
+    (32) s -> . PRINT FLECHA checkid
+    (35) s -> . estif c2 estelse est END
+    (36) s -> . estif c2 END
+    (43) s -> . DO pushid = first , last , increment est END
+    (44) s -> . DO pushid = first , last est END
+    (45) s -> . estdo est END
+    (46) s -> . EXIT
+    (29) pushid -> . ID
+    (23) iddim -> . pushid LPAREN ea RPAREN
+    (24) iddim -> . pushid LPAREN ea , ea RPAREN
+    (37) estif -> . IF
+    (47) estdo -> . DO
+
+    CALL            shift and go to state 27
+    READ            shift and go to state 31
+    PRINT           shift and go to state 32
+    DO              shift and go to state 34
+    EXIT            shift and go to state 36
+    ID              shift and go to state 28
+    IF              shift and go to state 37
+
+    estdo                          shift and go to state 35
+    est                            shift and go to state 62
+    s                              shift and go to state 26
+    pushid                         shift and go to state 29
+    iddim                          shift and go to state 30
+    estif                          shift and go to state 33
+
+state 36
+
+    (46) s -> EXIT .
+
+    END             reduce using rule 46 (s -> EXIT .)
+    CALL            reduce using rule 46 (s -> EXIT .)
+    READ            reduce using rule 46 (s -> EXIT .)
+    PRINT           reduce using rule 46 (s -> EXIT .)
+    DO              reduce using rule 46 (s -> EXIT .)
+    EXIT            reduce using rule 46 (s -> EXIT .)
+    ID              reduce using rule 46 (s -> EXIT .)
+    IF              reduce using rule 46 (s -> EXIT .)
+    ELSE            reduce using rule 46 (s -> EXIT .)
+    ELSIF           reduce using rule 46 (s -> EXIT .)
+
+
+state 37
+
+    (37) estif -> IF .
+
+    NOT             reduce using rule 37 (estif -> IF .)
+    LPAREN          reduce using rule 37 (estif -> IF .)
+    ID              reduce using rule 37 (estif -> IF .)
+
+
+state 38
+
+    (18) r -> SUBROUTINE idsubroutine est . END
+    (22) est -> est . s
+    (20) s -> . CALL ID LPAREN RPAREN
+    (27) s -> . pushid = ea
+    (28) s -> . iddim = ea
+    (30) s -> . READ FLECHA ID
+    (31) s -> . PRINT FLECHA TEXT
+    (32) s -> . PRINT FLECHA checkid
+    (35) s -> . estif c2 estelse est END
+    (36) s -> . estif c2 END
+    (43) s -> . DO pushid = first , last , increment est END
+    (44) s -> . DO pushid = first , last est END
+    (45) s -> . estdo est END
+    (46) s -> . EXIT
+    (29) pushid -> . ID
+    (23) iddim -> . pushid LPAREN ea RPAREN
+    (24) iddim -> . pushid LPAREN ea , ea RPAREN
+    (37) estif -> . IF
+    (47) estdo -> . DO
+
+    END             shift and go to state 63
+    CALL            shift and go to state 27
+    READ            shift and go to state 31
+    PRINT           shift and go to state 32
+    DO              shift and go to state 34
+    EXIT            shift and go to state 36
+    ID              shift and go to state 28
+    IF              shift and go to state 37
+
+    s                              shift and go to state 42
+    pushid                         shift and go to state 29
+    iddim                          shift and go to state 30
+    estif                          shift and go to state 33
+    estdo                          shift and go to state 35
+
+state 39
+
+    (13) c1 -> c1 , ID .
+    (15) c1 -> c1 , ID . LPAREN CTE RPAREN
+    (17) c1 -> c1 , ID . LPAREN CTE , CTE RPAREN
+
+    ,               reduce using rule 13 (c1 -> c1 , ID .)
+    INTEGER         reduce using rule 13 (c1 -> c1 , ID .)
+    REAL            reduce using rule 13 (c1 -> c1 , ID .)
+    SUBROUTINE      reduce using rule 13 (c1 -> c1 , ID .)
+    BEGIN           reduce using rule 13 (c1 -> c1 , ID .)
+    LPAREN          shift and go to state 64
+
+
+state 40
+
+    (14) c1 -> ID LPAREN CTE . RPAREN
+    (16) c1 -> ID LPAREN CTE . , CTE RPAREN
+
+    RPAREN          shift and go to state 65
+    ,               shift and go to state 66
+
+
+state 41
+
+    (3) main -> BEGIN est END .
+
+    END             reduce using rule 3 (main -> BEGIN est END .)
+
+
+state 42
+
+    (22) est -> est s .
+
+    END             reduce using rule 22 (est -> est s .)
+    CALL            reduce using rule 22 (est -> est s .)
+    READ            reduce using rule 22 (est -> est s .)
+    PRINT           reduce using rule 22 (est -> est s .)
+    DO              reduce using rule 22 (est -> est s .)
+    EXIT            reduce using rule 22 (est -> est s .)
+    ID              reduce using rule 22 (est -> est s .)
+    IF              reduce using rule 22 (est -> est s .)
+    ELSE            reduce using rule 22 (est -> est s .)
+    ELSIF           reduce using rule 22 (est -> est s .)
+
+
+state 43
+
+    (20) s -> CALL ID . LPAREN RPAREN
+
+    LPAREN          shift and go to state 67
+
+
+state 44
+
+    (27) s -> pushid = . ea
+    (53) ea -> . md
+    (54) ea -> . ea hacesuma md
+    (56) ea -> . ea haceresta md
+    (58) md -> . exp
+    (59) md -> . md hacemult exp
+    (61) md -> . md hacediv exp
+    (63) exp -> . pushid
+    (64) exp -> . iddim
+    (65) exp -> . pushcte
+    (67) exp -> . parenIZQ ea parenDER
+    (29) pushid -> . ID
+    (23) iddim -> . pushid LPAREN ea RPAREN
+    (24) iddim -> . pushid LPAREN ea , ea RPAREN
+    (66) pushcte -> . CTE
+    (68) parenIZQ -> . LPAREN
+
+    ID              shift and go to state 28
+    CTE             shift and go to state 75
+    LPAREN          shift and go to state 59
+
+    pushid                         shift and go to state 68
+    ea                             shift and go to state 69
+    md                             shift and go to state 70
+    exp                            shift and go to state 71
+    iddim                          shift and go to state 72
+    pushcte                        shift and go to state 73
+    parenIZQ                       shift and go to state 74
+
+state 45
+
+    (23) iddim -> pushid LPAREN . ea RPAREN
+    (24) iddim -> pushid LPAREN . ea , ea RPAREN
+    (53) ea -> . md
+    (54) ea -> . ea hacesuma md
+    (56) ea -> . ea haceresta md
+    (58) md -> . exp
+    (59) md -> . md hacemult exp
+    (61) md -> . md hacediv exp
+    (63) exp -> . pushid
+    (64) exp -> . iddim
+    (65) exp -> . pushcte
+    (67) exp -> . parenIZQ ea parenDER
+    (29) pushid -> . ID
+    (23) iddim -> . pushid LPAREN ea RPAREN
+    (24) iddim -> . pushid LPAREN ea , ea RPAREN
+    (66) pushcte -> . CTE
+    (68) parenIZQ -> . LPAREN
+
+    ID              shift and go to state 28
+    CTE             shift and go to state 75
+    LPAREN          shift and go to state 59
+
+    pushid                         shift and go to state 68
+    ea                             shift and go to state 76
+    md                             shift and go to state 70
+    exp                            shift and go to state 71
+    iddim                          shift and go to state 72
+    pushcte                        shift and go to state 73
+    parenIZQ                       shift and go to state 74
+
+state 46
+
+    (28) s -> iddim = . ea
+    (53) ea -> . md
+    (54) ea -> . ea hacesuma md
+    (56) ea -> . ea haceresta md
+    (58) md -> . exp
+    (59) md -> . md hacemult exp
+    (61) md -> . md hacediv exp
+    (63) exp -> . pushid
+    (64) exp -> . iddim
+    (65) exp -> . pushcte
+    (67) exp -> . parenIZQ ea parenDER
+    (29) pushid -> . ID
+    (23) iddim -> . pushid LPAREN ea RPAREN
+    (24) iddim -> . pushid LPAREN ea , ea RPAREN
+    (66) pushcte -> . CTE
+    (68) parenIZQ -> . LPAREN
+
+    ID              shift and go to state 28
+    CTE             shift and go to state 75
+    LPAREN          shift and go to state 59
+
+    iddim                          shift and go to state 72
+    ea                             shift and go to state 77
+    md                             shift and go to state 70
+    exp                            shift and go to state 71
+    pushid                         shift and go to state 68
+    pushcte                        shift and go to state 73
+    parenIZQ                       shift and go to state 74
+
+state 47
+
+    (30) s -> READ FLECHA . ID
+
+    ID              shift and go to state 78
+
+
+state 48
+
+    (31) s -> PRINT FLECHA . TEXT
+    (32) s -> PRINT FLECHA . checkid
+    (33) checkid -> . ID
+    (34) checkid -> . printiddim
+    (25) printiddim -> . pushid LPAREN ea RPAREN
+    (26) printiddim -> . pushid LPAREN ea , ea RPAREN
+    (29) pushid -> . ID
+
+    TEXT            shift and go to state 79
+    ID              shift and go to state 81
+
+    checkid                        shift and go to state 80
+    printiddim                     shift and go to state 82
+    pushid                         shift and go to state 83
+
+state 49
+
+    (35) s -> estif c2 . estelse est END
+    (36) s -> estif c2 . END
+    (39) c2 -> c2 . estelsif el estthen est
+    (41) estelse -> . ELSE
+    (42) estelsif -> . ELSIF
+
+    END             shift and go to state 85
+    ELSE            shift and go to state 87
+    ELSIF           shift and go to state 88
+
+    estelse                        shift and go to state 84
+    estelsif                       shift and go to state 86
+
+state 50
+
+    (38) c2 -> el . estthen est
+    (71) el -> el . haceor eand
+    (40) estthen -> . THEN
+    (72) haceor -> . OR
+
+    THEN            shift and go to state 91
+    OR              shift and go to state 92
+
+    estthen                        shift and go to state 89
+    haceor                         shift and go to state 90
+
+state 51
+
+    (70) el -> eand .
+    (74) eand -> eand . haceand enot
+    (75) haceand -> . AND
+
+    THEN            reduce using rule 70 (el -> eand .)
+    OR              reduce using rule 70 (el -> eand .)
+    RPAREN          reduce using rule 70 (el -> eand .)
+    AND             shift and go to state 94
+
+    haceand                        shift and go to state 93
+
+state 52
+
+    (73) eand -> enot .
+
+    AND             reduce using rule 73 (eand -> enot .)
+    THEN            reduce using rule 73 (eand -> enot .)
+    OR              reduce using rule 73 (eand -> enot .)
+    RPAREN          reduce using rule 73 (eand -> enot .)
+
+
+state 53
+
+    (76) enot -> er .
+
+    AND             reduce using rule 76 (enot -> er .)
+    THEN            reduce using rule 76 (enot -> er .)
+    OR              reduce using rule 76 (enot -> er .)
+    RPAREN          reduce using rule 76 (enot -> er .)
+
+
+state 54
+
+    (77) enot -> hacenot . pushid
+    (29) pushid -> . ID
+
+    ID              shift and go to state 28
+
+    pushid                         shift and go to state 95
+
+state 55
+
+    (92) c4 -> pushid .
+    (23) iddim -> pushid . LPAREN ea RPAREN
+    (24) iddim -> pushid . LPAREN ea , ea RPAREN
+
+    MENOR           reduce using rule 92 (c4 -> pushid .)
+    MENOR_IGUAL     reduce using rule 92 (c4 -> pushid .)
+    MAYOR           reduce using rule 92 (c4 -> pushid .)
+    MAYOR_IGUAL     reduce using rule 92 (c4 -> pushid .)
+    IGUAL           reduce using rule 92 (c4 -> pushid .)
+    DESIGUAL        reduce using rule 92 (c4 -> pushid .)
+    AND             reduce using rule 92 (c4 -> pushid .)
+    THEN            reduce using rule 92 (c4 -> pushid .)
+    OR              reduce using rule 92 (c4 -> pushid .)
+    RPAREN          reduce using rule 92 (c4 -> pushid .)
+    LPAREN          shift and go to state 45
+
+
+state 56
+
+    (79) er -> parenIZQ . el parenDER
+    (70) el -> . eand
+    (71) el -> . el haceor eand
+    (73) eand -> . enot
+    (74) eand -> . eand haceand enot
+    (76) enot -> . er
+    (77) enot -> . hacenot pushid
+    (79) er -> . parenIZQ el parenDER
+    (80) er -> . c4 hacemenor c5
+    (82) er -> . c4 hacemenorigual c5
+    (84) er -> . c4 hacemayor c5
+    (86) er -> . c4 hacemayorigual c5
+    (88) er -> . c4 haceigual c5
+    (90) er -> . c4 hacedesigual c5
+    (78) hacenot -> . NOT
+    (68) parenIZQ -> . LPAREN
+    (92) c4 -> . pushid
+    (93) c4 -> . iddim
+    (29) pushid -> . ID
+    (23) iddim -> . pushid LPAREN ea RPAREN
+    (24) iddim -> . pushid LPAREN ea , ea RPAREN
+
+    NOT             shift and go to state 58
+    LPAREN          shift and go to state 59
+    ID              shift and go to state 28
+
+    parenIZQ                       shift and go to state 56
+    el                             shift and go to state 96
+    eand                           shift and go to state 51
+    enot                           shift and go to state 52
+    er                             shift and go to state 53
+    hacenot                        shift and go to state 54
+    pushid                         shift and go to state 55
+    c4                             shift and go to state 57
+    iddim                          shift and go to state 60
+
+state 57
+
+    (80) er -> c4 . hacemenor c5
+    (82) er -> c4 . hacemenorigual c5
+    (84) er -> c4 . hacemayor c5
+    (86) er -> c4 . hacemayorigual c5
+    (88) er -> c4 . haceigual c5
+    (90) er -> c4 . hacedesigual c5
+    (81) hacemenor -> . MENOR
+    (83) hacemenorigual -> . MENOR_IGUAL
+    (85) hacemayor -> . MAYOR
+    (87) hacemayorigual -> . MAYOR_IGUAL
+    (89) haceigual -> . IGUAL
+    (91) hacedesigual -> . DESIGUAL
+
+    MENOR           shift and go to state 103
+    MENOR_IGUAL     shift and go to state 104
+    MAYOR           shift and go to state 105
+    MAYOR_IGUAL     shift and go to state 106
+    IGUAL           shift and go to state 107
+    DESIGUAL        shift and go to state 108
+
+    hacemenor                      shift and go to state 97
+    hacemenorigual                 shift and go to state 98
+    hacemayor                      shift and go to state 99
+    hacemayorigual                 shift and go to state 100
+    haceigual                      shift and go to state 101
+    hacedesigual                   shift and go to state 102
+
+state 58
+
+    (78) hacenot -> NOT .
+
+    ID              reduce using rule 78 (hacenot -> NOT .)
+
+
+state 59
+
+    (68) parenIZQ -> LPAREN .
+
+    NOT             reduce using rule 68 (parenIZQ -> LPAREN .)
+    LPAREN          reduce using rule 68 (parenIZQ -> LPAREN .)
+    ID              reduce using rule 68 (parenIZQ -> LPAREN .)
+    CTE             reduce using rule 68 (parenIZQ -> LPAREN .)
+
+
+state 60
+
+    (93) c4 -> iddim .
+
+    MENOR           reduce using rule 93 (c4 -> iddim .)
+    MENOR_IGUAL     reduce using rule 93 (c4 -> iddim .)
+    MAYOR           reduce using rule 93 (c4 -> iddim .)
+    MAYOR_IGUAL     reduce using rule 93 (c4 -> iddim .)
+    IGUAL           reduce using rule 93 (c4 -> iddim .)
+    DESIGUAL        reduce using rule 93 (c4 -> iddim .)
+    AND             reduce using rule 93 (c4 -> iddim .)
+    THEN            reduce using rule 93 (c4 -> iddim .)
+    OR              reduce using rule 93 (c4 -> iddim .)
+    RPAREN          reduce using rule 93 (c4 -> iddim .)
+
+
+state 61
+
+    (43) s -> DO pushid . = first , last , increment est END
+    (44) s -> DO pushid . = first , last est END
+
+    =               shift and go to state 109
+
+
+state 62
+
+    (45) s -> estdo est . END
+    (22) est -> est . s
+    (20) s -> . CALL ID LPAREN RPAREN
+    (27) s -> . pushid = ea
+    (28) s -> . iddim = ea
+    (30) s -> . READ FLECHA ID
+    (31) s -> . PRINT FLECHA TEXT
+    (32) s -> . PRINT FLECHA checkid
+    (35) s -> . estif c2 estelse est END
+    (36) s -> . estif c2 END
+    (43) s -> . DO pushid = first , last , increment est END
+    (44) s -> . DO pushid = first , last est END
+    (45) s -> . estdo est END
+    (46) s -> . EXIT
+    (29) pushid -> . ID
+    (23) iddim -> . pushid LPAREN ea RPAREN
+    (24) iddim -> . pushid LPAREN ea , ea RPAREN
+    (37) estif -> . IF
+    (47) estdo -> . DO
+
+    END             shift and go to state 110
+    CALL            shift and go to state 27
+    READ            shift and go to state 31
+    PRINT           shift and go to state 32
+    DO              shift and go to state 34
+    EXIT            shift and go to state 36
+    ID              shift and go to state 28
+    IF              shift and go to state 37
+
+    estdo                          shift and go to state 35
+    s                              shift and go to state 42
+    pushid                         shift and go to state 29
+    iddim                          shift and go to state 30
+    estif                          shift and go to state 33
+
+state 63
+
+    (18) r -> SUBROUTINE idsubroutine est END .
+
+    BEGIN           reduce using rule 18 (r -> SUBROUTINE idsubroutine est END .)
+    SUBROUTINE      reduce using rule 18 (r -> SUBROUTINE idsubroutine est END .)
+
+
+state 64
+
+    (15) c1 -> c1 , ID LPAREN . CTE RPAREN
+    (17) c1 -> c1 , ID LPAREN . CTE , CTE RPAREN
+
+    CTE             shift and go to state 111
+
+
+state 65
+
+    (14) c1 -> ID LPAREN CTE RPAREN .
+
+    ,               reduce using rule 14 (c1 -> ID LPAREN CTE RPAREN .)
+    INTEGER         reduce using rule 14 (c1 -> ID LPAREN CTE RPAREN .)
+    REAL            reduce using rule 14 (c1 -> ID LPAREN CTE RPAREN .)
+    SUBROUTINE      reduce using rule 14 (c1 -> ID LPAREN CTE RPAREN .)
+    BEGIN           reduce using rule 14 (c1 -> ID LPAREN CTE RPAREN .)
+
+
+state 66
+
+    (16) c1 -> ID LPAREN CTE , . CTE RPAREN
+
+    CTE             shift and go to state 112
+
+
+state 67
+
+    (20) s -> CALL ID LPAREN . RPAREN
+
+    RPAREN          shift and go to state 113
+
+
+state 68
+
+    (63) exp -> pushid .
+    (23) iddim -> pushid . LPAREN ea RPAREN
+    (24) iddim -> pushid . LPAREN ea , ea RPAREN
+
+    MULTIPLICACION  reduce using rule 63 (exp -> pushid .)
+    DIVISION        reduce using rule 63 (exp -> pushid .)
+    SUMA            reduce using rule 63 (exp -> pushid .)
+    RESTA           reduce using rule 63 (exp -> pushid .)
+    END             reduce using rule 63 (exp -> pushid .)
+    CALL            reduce using rule 63 (exp -> pushid .)
+    READ            reduce using rule 63 (exp -> pushid .)
+    PRINT           reduce using rule 63 (exp -> pushid .)
+    DO              reduce using rule 63 (exp -> pushid .)
+    EXIT            reduce using rule 63 (exp -> pushid .)
+    ID              reduce using rule 63 (exp -> pushid .)
+    IF              reduce using rule 63 (exp -> pushid .)
+    ELSE            reduce using rule 63 (exp -> pushid .)
+    ELSIF           reduce using rule 63 (exp -> pushid .)
+    RPAREN          reduce using rule 63 (exp -> pushid .)
+    ,               reduce using rule 63 (exp -> pushid .)
+    LPAREN          shift and go to state 45
+
+
+state 69
+
+    (27) s -> pushid = ea .
+    (54) ea -> ea . hacesuma md
+    (56) ea -> ea . haceresta md
+    (55) hacesuma -> . SUMA
+    (57) haceresta -> . RESTA
+
+    END             reduce using rule 27 (s -> pushid = ea .)
+    CALL            reduce using rule 27 (s -> pushid = ea .)
+    READ            reduce using rule 27 (s -> pushid = ea .)
+    PRINT           reduce using rule 27 (s -> pushid = ea .)
+    DO              reduce using rule 27 (s -> pushid = ea .)
+    EXIT            reduce using rule 27 (s -> pushid = ea .)
+    ID              reduce using rule 27 (s -> pushid = ea .)
+    IF              reduce using rule 27 (s -> pushid = ea .)
+    ELSE            reduce using rule 27 (s -> pushid = ea .)
+    ELSIF           reduce using rule 27 (s -> pushid = ea .)
+    SUMA            shift and go to state 116
+    RESTA           shift and go to state 117
+
+    hacesuma                       shift and go to state 114
+    haceresta                      shift and go to state 115
+
+state 70
+
+    (53) ea -> md .
+    (59) md -> md . hacemult exp
+    (61) md -> md . hacediv exp
+    (60) hacemult -> . MULTIPLICACION
+    (62) hacediv -> . DIVISION
+
+    SUMA            reduce using rule 53 (ea -> md .)
+    RESTA           reduce using rule 53 (ea -> md .)
+    END             reduce using rule 53 (ea -> md .)
+    CALL            reduce using rule 53 (ea -> md .)
+    READ            reduce using rule 53 (ea -> md .)
+    PRINT           reduce using rule 53 (ea -> md .)
+    DO              reduce using rule 53 (ea -> md .)
+    EXIT            reduce using rule 53 (ea -> md .)
+    ID              reduce using rule 53 (ea -> md .)
+    IF              reduce using rule 53 (ea -> md .)
+    ELSE            reduce using rule 53 (ea -> md .)
+    ELSIF           reduce using rule 53 (ea -> md .)
+    RPAREN          reduce using rule 53 (ea -> md .)
+    ,               reduce using rule 53 (ea -> md .)
+    MULTIPLICACION  shift and go to state 120
+    DIVISION        shift and go to state 121
+
+    hacemult                       shift and go to state 118
+    hacediv                        shift and go to state 119
+
+state 71
+
+    (58) md -> exp .
+
+    MULTIPLICACION  reduce using rule 58 (md -> exp .)
+    DIVISION        reduce using rule 58 (md -> exp .)
+    SUMA            reduce using rule 58 (md -> exp .)
+    RESTA           reduce using rule 58 (md -> exp .)
+    END             reduce using rule 58 (md -> exp .)
+    CALL            reduce using rule 58 (md -> exp .)
+    READ            reduce using rule 58 (md -> exp .)
+    PRINT           reduce using rule 58 (md -> exp .)
+    DO              reduce using rule 58 (md -> exp .)
+    EXIT            reduce using rule 58 (md -> exp .)
+    ID              reduce using rule 58 (md -> exp .)
+    IF              reduce using rule 58 (md -> exp .)
+    ELSE            reduce using rule 58 (md -> exp .)
+    ELSIF           reduce using rule 58 (md -> exp .)
+    RPAREN          reduce using rule 58 (md -> exp .)
+    ,               reduce using rule 58 (md -> exp .)
+
+
+state 72
+
+    (64) exp -> iddim .
+
+    MULTIPLICACION  reduce using rule 64 (exp -> iddim .)
+    DIVISION        reduce using rule 64 (exp -> iddim .)
+    SUMA            reduce using rule 64 (exp -> iddim .)
+    RESTA           reduce using rule 64 (exp -> iddim .)
+    END             reduce using rule 64 (exp -> iddim .)
+    CALL            reduce using rule 64 (exp -> iddim .)
+    READ            reduce using rule 64 (exp -> iddim .)
+    PRINT           reduce using rule 64 (exp -> iddim .)
+    DO              reduce using rule 64 (exp -> iddim .)
+    EXIT            reduce using rule 64 (exp -> iddim .)
+    ID              reduce using rule 64 (exp -> iddim .)
+    IF              reduce using rule 64 (exp -> iddim .)
+    ELSE            reduce using rule 64 (exp -> iddim .)
+    ELSIF           reduce using rule 64 (exp -> iddim .)
+    RPAREN          reduce using rule 64 (exp -> iddim .)
+    ,               reduce using rule 64 (exp -> iddim .)
+
+
+state 73
+
+    (65) exp -> pushcte .
+
+    MULTIPLICACION  reduce using rule 65 (exp -> pushcte .)
+    DIVISION        reduce using rule 65 (exp -> pushcte .)
+    SUMA            reduce using rule 65 (exp -> pushcte .)
+    RESTA           reduce using rule 65 (exp -> pushcte .)
+    END             reduce using rule 65 (exp -> pushcte .)
+    CALL            reduce using rule 65 (exp -> pushcte .)
+    READ            reduce using rule 65 (exp -> pushcte .)
+    PRINT           reduce using rule 65 (exp -> pushcte .)
+    DO              reduce using rule 65 (exp -> pushcte .)
+    EXIT            reduce using rule 65 (exp -> pushcte .)
+    ID              reduce using rule 65 (exp -> pushcte .)
+    IF              reduce using rule 65 (exp -> pushcte .)
+    ELSE            reduce using rule 65 (exp -> pushcte .)
+    ELSIF           reduce using rule 65 (exp -> pushcte .)
+    RPAREN          reduce using rule 65 (exp -> pushcte .)
+    ,               reduce using rule 65 (exp -> pushcte .)
+
+
+state 74
+
+    (67) exp -> parenIZQ . ea parenDER
+    (53) ea -> . md
+    (54) ea -> . ea hacesuma md
+    (56) ea -> . ea haceresta md
+    (58) md -> . exp
+    (59) md -> . md hacemult exp
+    (61) md -> . md hacediv exp
+    (63) exp -> . pushid
+    (64) exp -> . iddim
+    (65) exp -> . pushcte
+    (67) exp -> . parenIZQ ea parenDER
+    (29) pushid -> . ID
+    (23) iddim -> . pushid LPAREN ea RPAREN
+    (24) iddim -> . pushid LPAREN ea , ea RPAREN
+    (66) pushcte -> . CTE
+    (68) parenIZQ -> . LPAREN
+
+    ID              shift and go to state 28
+    CTE             shift and go to state 75
+    LPAREN          shift and go to state 59
+
+    parenIZQ                       shift and go to state 74
+    ea                             shift and go to state 122
+    md                             shift and go to state 70
+    exp                            shift and go to state 71
+    pushid                         shift and go to state 68
+    iddim                          shift and go to state 72
+    pushcte                        shift and go to state 73
+
+state 75
+
+    (66) pushcte -> CTE .
+
+    MULTIPLICACION  reduce using rule 66 (pushcte -> CTE .)
+    DIVISION        reduce using rule 66 (pushcte -> CTE .)
+    SUMA            reduce using rule 66 (pushcte -> CTE .)
+    RESTA           reduce using rule 66 (pushcte -> CTE .)
+    END             reduce using rule 66 (pushcte -> CTE .)
+    CALL            reduce using rule 66 (pushcte -> CTE .)
+    READ            reduce using rule 66 (pushcte -> CTE .)
+    PRINT           reduce using rule 66 (pushcte -> CTE .)
+    DO              reduce using rule 66 (pushcte -> CTE .)
+    EXIT            reduce using rule 66 (pushcte -> CTE .)
+    ID              reduce using rule 66 (pushcte -> CTE .)
+    IF              reduce using rule 66 (pushcte -> CTE .)
+    ELSE            reduce using rule 66 (pushcte -> CTE .)
+    ELSIF           reduce using rule 66 (pushcte -> CTE .)
+    RPAREN          reduce using rule 66 (pushcte -> CTE .)
+    ,               reduce using rule 66 (pushcte -> CTE .)
+    AND             reduce using rule 66 (pushcte -> CTE .)
+    THEN            reduce using rule 66 (pushcte -> CTE .)
+    OR              reduce using rule 66 (pushcte -> CTE .)
+
+
+state 76
+
+    (23) iddim -> pushid LPAREN ea . RPAREN
+    (24) iddim -> pushid LPAREN ea . , ea RPAREN
+    (54) ea -> ea . hacesuma md
+    (56) ea -> ea . haceresta md
+    (55) hacesuma -> . SUMA
+    (57) haceresta -> . RESTA
+
+    RPAREN          shift and go to state 123
+    ,               shift and go to state 124
+    SUMA            shift and go to state 116
+    RESTA           shift and go to state 117
+
+    hacesuma                       shift and go to state 114
+    haceresta                      shift and go to state 115
+
+state 77
+
+    (28) s -> iddim = ea .
+    (54) ea -> ea . hacesuma md
+    (56) ea -> ea . haceresta md
+    (55) hacesuma -> . SUMA
+    (57) haceresta -> . RESTA
+
+    END             reduce using rule 28 (s -> iddim = ea .)
+    CALL            reduce using rule 28 (s -> iddim = ea .)
+    READ            reduce using rule 28 (s -> iddim = ea .)
+    PRINT           reduce using rule 28 (s -> iddim = ea .)
+    DO              reduce using rule 28 (s -> iddim = ea .)
+    EXIT            reduce using rule 28 (s -> iddim = ea .)
+    ID              reduce using rule 28 (s -> iddim = ea .)
+    IF              reduce using rule 28 (s -> iddim = ea .)
+    ELSE            reduce using rule 28 (s -> iddim = ea .)
+    ELSIF           reduce using rule 28 (s -> iddim = ea .)
+    SUMA            shift and go to state 116
+    RESTA           shift and go to state 117
+
+    hacesuma                       shift and go to state 114
+    haceresta                      shift and go to state 115
+
+state 78
+
+    (30) s -> READ FLECHA ID .
+
+    END             reduce using rule 30 (s -> READ FLECHA ID .)
+    CALL            reduce using rule 30 (s -> READ FLECHA ID .)
+    READ            reduce using rule 30 (s -> READ FLECHA ID .)
+    PRINT           reduce using rule 30 (s -> READ FLECHA ID .)
+    DO              reduce using rule 30 (s -> READ FLECHA ID .)
+    EXIT            reduce using rule 30 (s -> READ FLECHA ID .)
+    ID              reduce using rule 30 (s -> READ FLECHA ID .)
+    IF              reduce using rule 30 (s -> READ FLECHA ID .)
+    ELSE            reduce using rule 30 (s -> READ FLECHA ID .)
+    ELSIF           reduce using rule 30 (s -> READ FLECHA ID .)
+
+
+state 79
+
+    (31) s -> PRINT FLECHA TEXT .
+
+    END             reduce using rule 31 (s -> PRINT FLECHA TEXT .)
+    CALL            reduce using rule 31 (s -> PRINT FLECHA TEXT .)
+    READ            reduce using rule 31 (s -> PRINT FLECHA TEXT .)
+    PRINT           reduce using rule 31 (s -> PRINT FLECHA TEXT .)
+    DO              reduce using rule 31 (s -> PRINT FLECHA TEXT .)
+    EXIT            reduce using rule 31 (s -> PRINT FLECHA TEXT .)
+    ID              reduce using rule 31 (s -> PRINT FLECHA TEXT .)
+    IF              reduce using rule 31 (s -> PRINT FLECHA TEXT .)
+    ELSE            reduce using rule 31 (s -> PRINT FLECHA TEXT .)
+    ELSIF           reduce using rule 31 (s -> PRINT FLECHA TEXT .)
+
+
+state 80
+
+    (32) s -> PRINT FLECHA checkid .
+
+    END             reduce using rule 32 (s -> PRINT FLECHA checkid .)
+    CALL            reduce using rule 32 (s -> PRINT FLECHA checkid .)
+    READ            reduce using rule 32 (s -> PRINT FLECHA checkid .)
+    PRINT           reduce using rule 32 (s -> PRINT FLECHA checkid .)
+    DO              reduce using rule 32 (s -> PRINT FLECHA checkid .)
+    EXIT            reduce using rule 32 (s -> PRINT FLECHA checkid .)
+    ID              reduce using rule 32 (s -> PRINT FLECHA checkid .)
+    IF              reduce using rule 32 (s -> PRINT FLECHA checkid .)
+    ELSE            reduce using rule 32 (s -> PRINT FLECHA checkid .)
+    ELSIF           reduce using rule 32 (s -> PRINT FLECHA checkid .)
+
+
+state 81
+
+    (33) checkid -> ID .
+    (29) pushid -> ID .
+
+    END             reduce using rule 33 (checkid -> ID .)
+    CALL            reduce using rule 33 (checkid -> ID .)
+    READ            reduce using rule 33 (checkid -> ID .)
+    PRINT           reduce using rule 33 (checkid -> ID .)
+    DO              reduce using rule 33 (checkid -> ID .)
+    EXIT            reduce using rule 33 (checkid -> ID .)
+    ID              reduce using rule 33 (checkid -> ID .)
+    IF              reduce using rule 33 (checkid -> ID .)
+    ELSE            reduce using rule 33 (checkid -> ID .)
+    ELSIF           reduce using rule 33 (checkid -> ID .)
+    LPAREN          reduce using rule 29 (pushid -> ID .)
+
+
+state 82
+
+    (34) checkid -> printiddim .
+
+    END             reduce using rule 34 (checkid -> printiddim .)
+    CALL            reduce using rule 34 (checkid -> printiddim .)
+    READ            reduce using rule 34 (checkid -> printiddim .)
+    PRINT           reduce using rule 34 (checkid -> printiddim .)
+    DO              reduce using rule 34 (checkid -> printiddim .)
+    EXIT            reduce using rule 34 (checkid -> printiddim .)
+    ID              reduce using rule 34 (checkid -> printiddim .)
+    IF              reduce using rule 34 (checkid -> printiddim .)
+    ELSE            reduce using rule 34 (checkid -> printiddim .)
+    ELSIF           reduce using rule 34 (checkid -> printiddim .)
+
+
+state 83
+
+    (25) printiddim -> pushid . LPAREN ea RPAREN
+    (26) printiddim -> pushid . LPAREN ea , ea RPAREN
+
+    LPAREN          shift and go to state 125
+
+
+state 84
+
+    (35) s -> estif c2 estelse . est END
+    (21) est -> . s
+    (22) est -> . est s
+    (20) s -> . CALL ID LPAREN RPAREN
+    (27) s -> . pushid = ea
+    (28) s -> . iddim = ea
+    (30) s -> . READ FLECHA ID
+    (31) s -> . PRINT FLECHA TEXT
+    (32) s -> . PRINT FLECHA checkid
+    (35) s -> . estif c2 estelse est END
+    (36) s -> . estif c2 END
+    (43) s -> . DO pushid = first , last , increment est END
+    (44) s -> . DO pushid = first , last est END
+    (45) s -> . estdo est END
+    (46) s -> . EXIT
+    (29) pushid -> . ID
+    (23) iddim -> . pushid LPAREN ea RPAREN
+    (24) iddim -> . pushid LPAREN ea , ea RPAREN
+    (37) estif -> . IF
+    (47) estdo -> . DO
+
+    CALL            shift and go to state 27
+    READ            shift and go to state 31
+    PRINT           shift and go to state 32
+    DO              shift and go to state 34
+    EXIT            shift and go to state 36
+    ID              shift and go to state 28
+    IF              shift and go to state 37
+
+    estif                          shift and go to state 33
+    est                            shift and go to state 126
+    s                              shift and go to state 26
+    pushid                         shift and go to state 29
+    iddim                          shift and go to state 30
+    estdo                          shift and go to state 35
+
+state 85
+
+    (36) s -> estif c2 END .
+
+    END             reduce using rule 36 (s -> estif c2 END .)
+    CALL            reduce using rule 36 (s -> estif c2 END .)
+    READ            reduce using rule 36 (s -> estif c2 END .)
+    PRINT           reduce using rule 36 (s -> estif c2 END .)
+    DO              reduce using rule 36 (s -> estif c2 END .)
+    EXIT            reduce using rule 36 (s -> estif c2 END .)
+    ID              reduce using rule 36 (s -> estif c2 END .)
+    IF              reduce using rule 36 (s -> estif c2 END .)
+    ELSE            reduce using rule 36 (s -> estif c2 END .)
+    ELSIF           reduce using rule 36 (s -> estif c2 END .)
+
+
+state 86
+
+    (39) c2 -> c2 estelsif . el estthen est
+    (70) el -> . eand
+    (71) el -> . el haceor eand
+    (73) eand -> . enot
+    (74) eand -> . eand haceand enot
+    (76) enot -> . er
+    (77) enot -> . hacenot pushid
+    (79) er -> . parenIZQ el parenDER
+    (80) er -> . c4 hacemenor c5
+    (82) er -> . c4 hacemenorigual c5
+    (84) er -> . c4 hacemayor c5
+    (86) er -> . c4 hacemayorigual c5
+    (88) er -> . c4 haceigual c5
+    (90) er -> . c4 hacedesigual c5
+    (78) hacenot -> . NOT
+    (68) parenIZQ -> . LPAREN
+    (92) c4 -> . pushid
+    (93) c4 -> . iddim
+    (29) pushid -> . ID
+    (23) iddim -> . pushid LPAREN ea RPAREN
+    (24) iddim -> . pushid LPAREN ea , ea RPAREN
+
+    NOT             shift and go to state 58
+    LPAREN          shift and go to state 59
+    ID              shift and go to state 28
+
+    el                             shift and go to state 127
+    eand                           shift and go to state 51
+    enot                           shift and go to state 52
+    er                             shift and go to state 53
+    hacenot                        shift and go to state 54
+    pushid                         shift and go to state 55
+    parenIZQ                       shift and go to state 56
+    c4                             shift and go to state 57
+    iddim                          shift and go to state 60
+
+state 87
+
+    (41) estelse -> ELSE .
+
+    CALL            reduce using rule 41 (estelse -> ELSE .)
+    READ            reduce using rule 41 (estelse -> ELSE .)
+    PRINT           reduce using rule 41 (estelse -> ELSE .)
+    DO              reduce using rule 41 (estelse -> ELSE .)
+    EXIT            reduce using rule 41 (estelse -> ELSE .)
+    ID              reduce using rule 41 (estelse -> ELSE .)
+    IF              reduce using rule 41 (estelse -> ELSE .)
+
+
+state 88
+
+    (42) estelsif -> ELSIF .
+
+    NOT             reduce using rule 42 (estelsif -> ELSIF .)
+    LPAREN          reduce using rule 42 (estelsif -> ELSIF .)
+    ID              reduce using rule 42 (estelsif -> ELSIF .)
+
+
+state 89
+
+    (38) c2 -> el estthen . est
+    (21) est -> . s
+    (22) est -> . est s
+    (20) s -> . CALL ID LPAREN RPAREN
+    (27) s -> . pushid = ea
+    (28) s -> . iddim = ea
+    (30) s -> . READ FLECHA ID
+    (31) s -> . PRINT FLECHA TEXT
+    (32) s -> . PRINT FLECHA checkid
+    (35) s -> . estif c2 estelse est END
+    (36) s -> . estif c2 END
+    (43) s -> . DO pushid = first , last , increment est END
+    (44) s -> . DO pushid = first , last est END
+    (45) s -> . estdo est END
+    (46) s -> . EXIT
+    (29) pushid -> . ID
+    (23) iddim -> . pushid LPAREN ea RPAREN
+    (24) iddim -> . pushid LPAREN ea , ea RPAREN
+    (37) estif -> . IF
+    (47) estdo -> . DO
+
+    CALL            shift and go to state 27
+    READ            shift and go to state 31
+    PRINT           shift and go to state 32
+    DO              shift and go to state 34
+    EXIT            shift and go to state 36
+    ID              shift and go to state 28
+    IF              shift and go to state 37
+
+    est                            shift and go to state 128
+    s                              shift and go to state 26
+    pushid                         shift and go to state 29
+    iddim                          shift and go to state 30
+    estif                          shift and go to state 33
+    estdo                          shift and go to state 35
+
+state 90
+
+    (71) el -> el haceor . eand
+    (73) eand -> . enot
+    (74) eand -> . eand haceand enot
+    (76) enot -> . er
+    (77) enot -> . hacenot pushid
+    (79) er -> . parenIZQ el parenDER
+    (80) er -> . c4 hacemenor c5
+    (82) er -> . c4 hacemenorigual c5
+    (84) er -> . c4 hacemayor c5
+    (86) er -> . c4 hacemayorigual c5
+    (88) er -> . c4 haceigual c5
+    (90) er -> . c4 hacedesigual c5
+    (78) hacenot -> . NOT
+    (68) parenIZQ -> . LPAREN
+    (92) c4 -> . pushid
+    (93) c4 -> . iddim
+    (29) pushid -> . ID
+    (23) iddim -> . pushid LPAREN ea RPAREN
+    (24) iddim -> . pushid LPAREN ea , ea RPAREN
+
+    NOT             shift and go to state 58
+    LPAREN          shift and go to state 59
+    ID              shift and go to state 28
+
+    eand                           shift and go to state 129
+    enot                           shift and go to state 52
+    er                             shift and go to state 53
+    hacenot                        shift and go to state 54
+    pushid                         shift and go to state 55
+    parenIZQ                       shift and go to state 56
+    c4                             shift and go to state 57
+    iddim                          shift and go to state 60
+
+state 91
+
+    (40) estthen -> THEN .
+
+    CALL            reduce using rule 40 (estthen -> THEN .)
+    READ            reduce using rule 40 (estthen -> THEN .)
+    PRINT           reduce using rule 40 (estthen -> THEN .)
+    DO              reduce using rule 40 (estthen -> THEN .)
+    EXIT            reduce using rule 40 (estthen -> THEN .)
+    ID              reduce using rule 40 (estthen -> THEN .)
+    IF              reduce using rule 40 (estthen -> THEN .)
+
+
+state 92
+
+    (72) haceor -> OR .
+
+    NOT             reduce using rule 72 (haceor -> OR .)
+    LPAREN          reduce using rule 72 (haceor -> OR .)
+    ID              reduce using rule 72 (haceor -> OR .)
+
+
+state 93
+
+    (74) eand -> eand haceand . enot
+    (76) enot -> . er
+    (77) enot -> . hacenot pushid
+    (79) er -> . parenIZQ el parenDER
+    (80) er -> . c4 hacemenor c5
+    (82) er -> . c4 hacemenorigual c5
+    (84) er -> . c4 hacemayor c5
+    (86) er -> . c4 hacemayorigual c5
+    (88) er -> . c4 haceigual c5
+    (90) er -> . c4 hacedesigual c5
+    (78) hacenot -> . NOT
+    (68) parenIZQ -> . LPAREN
+    (92) c4 -> . pushid
+    (93) c4 -> . iddim
+    (29) pushid -> . ID
+    (23) iddim -> . pushid LPAREN ea RPAREN
+    (24) iddim -> . pushid LPAREN ea , ea RPAREN
+
+    NOT             shift and go to state 58
+    LPAREN          shift and go to state 59
+    ID              shift and go to state 28
+
+    enot                           shift and go to state 130
+    er                             shift and go to state 53
+    hacenot                        shift and go to state 54
+    pushid                         shift and go to state 55
+    parenIZQ                       shift and go to state 56
+    c4                             shift and go to state 57
+    iddim                          shift and go to state 60
+
+state 94
+
+    (75) haceand -> AND .
+
+    NOT             reduce using rule 75 (haceand -> AND .)
+    LPAREN          reduce using rule 75 (haceand -> AND .)
+    ID              reduce using rule 75 (haceand -> AND .)
+
+
+state 95
+
+    (77) enot -> hacenot pushid .
+
+    AND             reduce using rule 77 (enot -> hacenot pushid .)
+    THEN            reduce using rule 77 (enot -> hacenot pushid .)
+    OR              reduce using rule 77 (enot -> hacenot pushid .)
+    RPAREN          reduce using rule 77 (enot -> hacenot pushid .)
+
+
+state 96
+
+    (79) er -> parenIZQ el . parenDER
+    (71) el -> el . haceor eand
+    (69) parenDER -> . RPAREN
+    (72) haceor -> . OR
+
+    RPAREN          shift and go to state 132
+    OR              shift and go to state 92
+
+    parenDER                       shift and go to state 131
+    haceor                         shift and go to state 90
+
+state 97
+
+    (80) er -> c4 hacemenor . c5
+    (94) c5 -> . c4
+    (95) c5 -> . pushcte
+    (92) c4 -> . pushid
+    (93) c4 -> . iddim
+    (66) pushcte -> . CTE
+    (29) pushid -> . ID
+    (23) iddim -> . pushid LPAREN ea RPAREN
+    (24) iddim -> . pushid LPAREN ea , ea RPAREN
+
+    CTE             shift and go to state 75
+    ID              shift and go to state 28
+
+    c4                             shift and go to state 133
+    c5                             shift and go to state 134
+    pushcte                        shift and go to state 135
+    pushid                         shift and go to state 55
+    iddim                          shift and go to state 60
+
+state 98
+
+    (82) er -> c4 hacemenorigual . c5
+    (94) c5 -> . c4
+    (95) c5 -> . pushcte
+    (92) c4 -> . pushid
+    (93) c4 -> . iddim
+    (66) pushcte -> . CTE
+    (29) pushid -> . ID
+    (23) iddim -> . pushid LPAREN ea RPAREN
+    (24) iddim -> . pushid LPAREN ea , ea RPAREN
+
+    CTE             shift and go to state 75
+    ID              shift and go to state 28
+
+    c4                             shift and go to state 133
+    c5                             shift and go to state 136
+    pushcte                        shift and go to state 135
+    pushid                         shift and go to state 55
+    iddim                          shift and go to state 60
+
+state 99
+
+    (84) er -> c4 hacemayor . c5
+    (94) c5 -> . c4
+    (95) c5 -> . pushcte
+    (92) c4 -> . pushid
+    (93) c4 -> . iddim
+    (66) pushcte -> . CTE
+    (29) pushid -> . ID
+    (23) iddim -> . pushid LPAREN ea RPAREN
+    (24) iddim -> . pushid LPAREN ea , ea RPAREN
+
+    CTE             shift and go to state 75
+    ID              shift and go to state 28
+
+    c4                             shift and go to state 133
+    c5                             shift and go to state 137
+    pushcte                        shift and go to state 135
+    pushid                         shift and go to state 55
+    iddim                          shift and go to state 60
+
+state 100
+
+    (86) er -> c4 hacemayorigual . c5
+    (94) c5 -> . c4
+    (95) c5 -> . pushcte
+    (92) c4 -> . pushid
+    (93) c4 -> . iddim
+    (66) pushcte -> . CTE
+    (29) pushid -> . ID
+    (23) iddim -> . pushid LPAREN ea RPAREN
+    (24) iddim -> . pushid LPAREN ea , ea RPAREN
+
+    CTE             shift and go to state 75
+    ID              shift and go to state 28
+
+    c4                             shift and go to state 133
+    c5                             shift and go to state 138
+    pushcte                        shift and go to state 135
+    pushid                         shift and go to state 55
+    iddim                          shift and go to state 60
+
+state 101
+
+    (88) er -> c4 haceigual . c5
+    (94) c5 -> . c4
+    (95) c5 -> . pushcte
+    (92) c4 -> . pushid
+    (93) c4 -> . iddim
+    (66) pushcte -> . CTE
+    (29) pushid -> . ID
+    (23) iddim -> . pushid LPAREN ea RPAREN
+    (24) iddim -> . pushid LPAREN ea , ea RPAREN
+
+    CTE             shift and go to state 75
+    ID              shift and go to state 28
+
+    c4                             shift and go to state 133
+    c5                             shift and go to state 139
+    pushcte                        shift and go to state 135
+    pushid                         shift and go to state 55
+    iddim                          shift and go to state 60
+
+state 102
+
+    (90) er -> c4 hacedesigual . c5
+    (94) c5 -> . c4
+    (95) c5 -> . pushcte
+    (92) c4 -> . pushid
+    (93) c4 -> . iddim
+    (66) pushcte -> . CTE
+    (29) pushid -> . ID
+    (23) iddim -> . pushid LPAREN ea RPAREN
+    (24) iddim -> . pushid LPAREN ea , ea RPAREN
+
+    CTE             shift and go to state 75
+    ID              shift and go to state 28
+
+    c4                             shift and go to state 133
+    c5                             shift and go to state 140
+    pushcte                        shift and go to state 135
+    pushid                         shift and go to state 55
+    iddim                          shift and go to state 60
+
+state 103
+
+    (81) hacemenor -> MENOR .
+
+    CTE             reduce using rule 81 (hacemenor -> MENOR .)
+    ID              reduce using rule 81 (hacemenor -> MENOR .)
+
+
+state 104
+
+    (83) hacemenorigual -> MENOR_IGUAL .
+
+    CTE             reduce using rule 83 (hacemenorigual -> MENOR_IGUAL .)
+    ID              reduce using rule 83 (hacemenorigual -> MENOR_IGUAL .)
+
+
+state 105
+
+    (85) hacemayor -> MAYOR .
+
+    CTE             reduce using rule 85 (hacemayor -> MAYOR .)
+    ID              reduce using rule 85 (hacemayor -> MAYOR .)
+
+
+state 106
+
+    (87) hacemayorigual -> MAYOR_IGUAL .
+
+    CTE             reduce using rule 87 (hacemayorigual -> MAYOR_IGUAL .)
+    ID              reduce using rule 87 (hacemayorigual -> MAYOR_IGUAL .)
+
+
+state 107
+
+    (89) haceigual -> IGUAL .
+
+    CTE             reduce using rule 89 (haceigual -> IGUAL .)
+    ID              reduce using rule 89 (haceigual -> IGUAL .)
+
+
+state 108
+
+    (91) hacedesigual -> DESIGUAL .
+
+    CTE             reduce using rule 91 (hacedesigual -> DESIGUAL .)
+    ID              reduce using rule 91 (hacedesigual -> DESIGUAL .)
+
+
+state 109
+
+    (43) s -> DO pushid = . first , last , increment est END
+    (44) s -> DO pushid = . first , last est END
+    (48) first -> . cteid
+    (49) cteid -> . pushid
+    (50) cteid -> . pushcte
+    (29) pushid -> . ID
+    (66) pushcte -> . CTE
+
+    ID              shift and go to state 28
+    CTE             shift and go to state 75
+
+    pushid                         shift and go to state 141
+    first                          shift and go to state 142
+    cteid                          shift and go to state 143
+    pushcte                        shift and go to state 144
+
+state 110
+
+    (45) s -> estdo est END .
+
+    END             reduce using rule 45 (s -> estdo est END .)
+    CALL            reduce using rule 45 (s -> estdo est END .)
+    READ            reduce using rule 45 (s -> estdo est END .)
+    PRINT           reduce using rule 45 (s -> estdo est END .)
+    DO              reduce using rule 45 (s -> estdo est END .)
+    EXIT            reduce using rule 45 (s -> estdo est END .)
+    ID              reduce using rule 45 (s -> estdo est END .)
+    IF              reduce using rule 45 (s -> estdo est END .)
+    ELSE            reduce using rule 45 (s -> estdo est END .)
+    ELSIF           reduce using rule 45 (s -> estdo est END .)
+
+
+state 111
+
+    (15) c1 -> c1 , ID LPAREN CTE . RPAREN
+    (17) c1 -> c1 , ID LPAREN CTE . , CTE RPAREN
+
+    RPAREN          shift and go to state 146
+    ,               shift and go to state 145
+
+
+state 112
+
+    (16) c1 -> ID LPAREN CTE , CTE . RPAREN
+
+    RPAREN          shift and go to state 147
+
+
+state 113
+
+    (20) s -> CALL ID LPAREN RPAREN .
+
+    END             reduce using rule 20 (s -> CALL ID LPAREN RPAREN .)
+    CALL            reduce using rule 20 (s -> CALL ID LPAREN RPAREN .)
+    READ            reduce using rule 20 (s -> CALL ID LPAREN RPAREN .)
+    PRINT           reduce using rule 20 (s -> CALL ID LPAREN RPAREN .)
+    DO              reduce using rule 20 (s -> CALL ID LPAREN RPAREN .)
+    EXIT            reduce using rule 20 (s -> CALL ID LPAREN RPAREN .)
+    ID              reduce using rule 20 (s -> CALL ID LPAREN RPAREN .)
+    IF              reduce using rule 20 (s -> CALL ID LPAREN RPAREN .)
+    ELSE            reduce using rule 20 (s -> CALL ID LPAREN RPAREN .)
+    ELSIF           reduce using rule 20 (s -> CALL ID LPAREN RPAREN .)
+
+
+state 114
+
+    (54) ea -> ea hacesuma . md
+    (58) md -> . exp
+    (59) md -> . md hacemult exp
+    (61) md -> . md hacediv exp
+    (63) exp -> . pushid
+    (64) exp -> . iddim
+    (65) exp -> . pushcte
+    (67) exp -> . parenIZQ ea parenDER
+    (29) pushid -> . ID
+    (23) iddim -> . pushid LPAREN ea RPAREN
+    (24) iddim -> . pushid LPAREN ea , ea RPAREN
+    (66) pushcte -> . CTE
+    (68) parenIZQ -> . LPAREN
+
+    ID              shift and go to state 28
+    CTE             shift and go to state 75
+    LPAREN          shift and go to state 59
+
+    md                             shift and go to state 148
+    exp                            shift and go to state 71
+    pushid                         shift and go to state 68
+    iddim                          shift and go to state 72
+    pushcte                        shift and go to state 73
+    parenIZQ                       shift and go to state 74
+
+state 115
+
+    (56) ea -> ea haceresta . md
+    (58) md -> . exp
+    (59) md -> . md hacemult exp
+    (61) md -> . md hacediv exp
+    (63) exp -> . pushid
+    (64) exp -> . iddim
+    (65) exp -> . pushcte
+    (67) exp -> . parenIZQ ea parenDER
+    (29) pushid -> . ID
+    (23) iddim -> . pushid LPAREN ea RPAREN
+    (24) iddim -> . pushid LPAREN ea , ea RPAREN
+    (66) pushcte -> . CTE
+    (68) parenIZQ -> . LPAREN
+
+    ID              shift and go to state 28
+    CTE             shift and go to state 75
+    LPAREN          shift and go to state 59
+
+    md                             shift and go to state 149
+    exp                            shift and go to state 71
+    pushid                         shift and go to state 68
+    iddim                          shift and go to state 72
+    pushcte                        shift and go to state 73
+    parenIZQ                       shift and go to state 74
+
+state 116
+
+    (55) hacesuma -> SUMA .
+
+    ID              reduce using rule 55 (hacesuma -> SUMA .)
+    CTE             reduce using rule 55 (hacesuma -> SUMA .)
+    LPAREN          reduce using rule 55 (hacesuma -> SUMA .)
+
+
+state 117
+
+    (57) haceresta -> RESTA .
+
+    ID              reduce using rule 57 (haceresta -> RESTA .)
+    CTE             reduce using rule 57 (haceresta -> RESTA .)
+    LPAREN          reduce using rule 57 (haceresta -> RESTA .)
+
+
+state 118
+
+    (59) md -> md hacemult . exp
+    (63) exp -> . pushid
+    (64) exp -> . iddim
+    (65) exp -> . pushcte
+    (67) exp -> . parenIZQ ea parenDER
+    (29) pushid -> . ID
+    (23) iddim -> . pushid LPAREN ea RPAREN
+    (24) iddim -> . pushid LPAREN ea , ea RPAREN
+    (66) pushcte -> . CTE
+    (68) parenIZQ -> . LPAREN
+
+    ID              shift and go to state 28
+    CTE             shift and go to state 75
+    LPAREN          shift and go to state 59
+
+    exp                            shift and go to state 150
+    pushid                         shift and go to state 68
+    iddim                          shift and go to state 72
+    pushcte                        shift and go to state 73
+    parenIZQ                       shift and go to state 74
+
+state 119
+
+    (61) md -> md hacediv . exp
+    (63) exp -> . pushid
+    (64) exp -> . iddim
+    (65) exp -> . pushcte
+    (67) exp -> . parenIZQ ea parenDER
+    (29) pushid -> . ID
+    (23) iddim -> . pushid LPAREN ea RPAREN
+    (24) iddim -> . pushid LPAREN ea , ea RPAREN
+    (66) pushcte -> . CTE
+    (68) parenIZQ -> . LPAREN
+
+    ID              shift and go to state 28
+    CTE             shift and go to state 75
+    LPAREN          shift and go to state 59
+
+    exp                            shift and go to state 151
+    pushid                         shift and go to state 68
+    iddim                          shift and go to state 72
+    pushcte                        shift and go to state 73
+    parenIZQ                       shift and go to state 74
+
+state 120
+
+    (60) hacemult -> MULTIPLICACION .
+
+    ID              reduce using rule 60 (hacemult -> MULTIPLICACION .)
+    CTE             reduce using rule 60 (hacemult -> MULTIPLICACION .)
+    LPAREN          reduce using rule 60 (hacemult -> MULTIPLICACION .)
+
+
+state 121
+
+    (62) hacediv -> DIVISION .
+
+    ID              reduce using rule 62 (hacediv -> DIVISION .)
+    CTE             reduce using rule 62 (hacediv -> DIVISION .)
+    LPAREN          reduce using rule 62 (hacediv -> DIVISION .)
+
+
+state 122
+
+    (67) exp -> parenIZQ ea . parenDER
+    (54) ea -> ea . hacesuma md
+    (56) ea -> ea . haceresta md
+    (69) parenDER -> . RPAREN
+    (55) hacesuma -> . SUMA
+    (57) haceresta -> . RESTA
+
+    RPAREN          shift and go to state 132
+    SUMA            shift and go to state 116
+    RESTA           shift and go to state 117
+
+    parenDER                       shift and go to state 152
+    hacesuma                       shift and go to state 114
+    haceresta                      shift and go to state 115
+
+state 123
+
+    (23) iddim -> pushid LPAREN ea RPAREN .
+
+    =               reduce using rule 23 (iddim -> pushid LPAREN ea RPAREN .)
+    MENOR           reduce using rule 23 (iddim -> pushid LPAREN ea RPAREN .)
+    MENOR_IGUAL     reduce using rule 23 (iddim -> pushid LPAREN ea RPAREN .)
+    MAYOR           reduce using rule 23 (iddim -> pushid LPAREN ea RPAREN .)
+    MAYOR_IGUAL     reduce using rule 23 (iddim -> pushid LPAREN ea RPAREN .)
+    IGUAL           reduce using rule 23 (iddim -> pushid LPAREN ea RPAREN .)
+    DESIGUAL        reduce using rule 23 (iddim -> pushid LPAREN ea RPAREN .)
+    MULTIPLICACION  reduce using rule 23 (iddim -> pushid LPAREN ea RPAREN .)
+    DIVISION        reduce using rule 23 (iddim -> pushid LPAREN ea RPAREN .)
+    SUMA            reduce using rule 23 (iddim -> pushid LPAREN ea RPAREN .)
+    RESTA           reduce using rule 23 (iddim -> pushid LPAREN ea RPAREN .)
+    END             reduce using rule 23 (iddim -> pushid LPAREN ea RPAREN .)
+    CALL            reduce using rule 23 (iddim -> pushid LPAREN ea RPAREN .)
+    READ            reduce using rule 23 (iddim -> pushid LPAREN ea RPAREN .)
+    PRINT           reduce using rule 23 (iddim -> pushid LPAREN ea RPAREN .)
+    DO              reduce using rule 23 (iddim -> pushid LPAREN ea RPAREN .)
+    EXIT            reduce using rule 23 (iddim -> pushid LPAREN ea RPAREN .)
+    ID              reduce using rule 23 (iddim -> pushid LPAREN ea RPAREN .)
+    IF              reduce using rule 23 (iddim -> pushid LPAREN ea RPAREN .)
+    ELSE            reduce using rule 23 (iddim -> pushid LPAREN ea RPAREN .)
+    ELSIF           reduce using rule 23 (iddim -> pushid LPAREN ea RPAREN .)
+    RPAREN          reduce using rule 23 (iddim -> pushid LPAREN ea RPAREN .)
+    ,               reduce using rule 23 (iddim -> pushid LPAREN ea RPAREN .)
+    AND             reduce using rule 23 (iddim -> pushid LPAREN ea RPAREN .)
+    THEN            reduce using rule 23 (iddim -> pushid LPAREN ea RPAREN .)
+    OR              reduce using rule 23 (iddim -> pushid LPAREN ea RPAREN .)
+
+
+state 124
+
+    (24) iddim -> pushid LPAREN ea , . ea RPAREN
+    (53) ea -> . md
+    (54) ea -> . ea hacesuma md
+    (56) ea -> . ea haceresta md
+    (58) md -> . exp
+    (59) md -> . md hacemult exp
+    (61) md -> . md hacediv exp
+    (63) exp -> . pushid
+    (64) exp -> . iddim
+    (65) exp -> . pushcte
+    (67) exp -> . parenIZQ ea parenDER
+    (29) pushid -> . ID
+    (23) iddim -> . pushid LPAREN ea RPAREN
+    (24) iddim -> . pushid LPAREN ea , ea RPAREN
+    (66) pushcte -> . CTE
+    (68) parenIZQ -> . LPAREN
+
+    ID              shift and go to state 28
+    CTE             shift and go to state 75
+    LPAREN          shift and go to state 59
+
+    pushid                         shift and go to state 68
+    ea                             shift and go to state 153
+    md                             shift and go to state 70
+    exp                            shift and go to state 71
+    iddim                          shift and go to state 72
+    pushcte                        shift and go to state 73
+    parenIZQ                       shift and go to state 74
+
+state 125
+
+    (25) printiddim -> pushid LPAREN . ea RPAREN
+    (26) printiddim -> pushid LPAREN . ea , ea RPAREN
+    (53) ea -> . md
+    (54) ea -> . ea hacesuma md
+    (56) ea -> . ea haceresta md
+    (58) md -> . exp
+    (59) md -> . md hacemult exp
+    (61) md -> . md hacediv exp
+    (63) exp -> . pushid
+    (64) exp -> . iddim
+    (65) exp -> . pushcte
+    (67) exp -> . parenIZQ ea parenDER
+    (29) pushid -> . ID
+    (23) iddim -> . pushid LPAREN ea RPAREN
+    (24) iddim -> . pushid LPAREN ea , ea RPAREN
+    (66) pushcte -> . CTE
+    (68) parenIZQ -> . LPAREN
+
+    ID              shift and go to state 28
+    CTE             shift and go to state 75
+    LPAREN          shift and go to state 59
+
+    pushid                         shift and go to state 68
+    ea                             shift and go to state 154
+    md                             shift and go to state 70
+    exp                            shift and go to state 71
+    iddim                          shift and go to state 72
+    pushcte                        shift and go to state 73
+    parenIZQ                       shift and go to state 74
+
+state 126
+
+    (35) s -> estif c2 estelse est . END
+    (22) est -> est . s
+    (20) s -> . CALL ID LPAREN RPAREN
+    (27) s -> . pushid = ea
+    (28) s -> . iddim = ea
+    (30) s -> . READ FLECHA ID
+    (31) s -> . PRINT FLECHA TEXT
+    (32) s -> . PRINT FLECHA checkid
+    (35) s -> . estif c2 estelse est END
+    (36) s -> . estif c2 END
+    (43) s -> . DO pushid = first , last , increment est END
+    (44) s -> . DO pushid = first , last est END
+    (45) s -> . estdo est END
+    (46) s -> . EXIT
+    (29) pushid -> . ID
+    (23) iddim -> . pushid LPAREN ea RPAREN
+    (24) iddim -> . pushid LPAREN ea , ea RPAREN
+    (37) estif -> . IF
+    (47) estdo -> . DO
+
+    END             shift and go to state 155
+    CALL            shift and go to state 27
+    READ            shift and go to state 31
+    PRINT           shift and go to state 32
+    DO              shift and go to state 34
+    EXIT            shift and go to state 36
+    ID              shift and go to state 28
+    IF              shift and go to state 37
+
+    estif                          shift and go to state 33
+    s                              shift and go to state 42
+    pushid                         shift and go to state 29
+    iddim                          shift and go to state 30
+    estdo                          shift and go to state 35
+
+state 127
+
+    (39) c2 -> c2 estelsif el . estthen est
+    (71) el -> el . haceor eand
+    (40) estthen -> . THEN
+    (72) haceor -> . OR
+
+    THEN            shift and go to state 91
+    OR              shift and go to state 92
+
+    estthen                        shift and go to state 156
+    haceor                         shift and go to state 90
+
+state 128
+
+    (38) c2 -> el estthen est .
+    (22) est -> est . s
+    (20) s -> . CALL ID LPAREN RPAREN
+    (27) s -> . pushid = ea
+    (28) s -> . iddim = ea
+    (30) s -> . READ FLECHA ID
+    (31) s -> . PRINT FLECHA TEXT
+    (32) s -> . PRINT FLECHA checkid
+    (35) s -> . estif c2 estelse est END
+    (36) s -> . estif c2 END
+    (43) s -> . DO pushid = first , last , increment est END
+    (44) s -> . DO pushid = first , last est END
+    (45) s -> . estdo est END
+    (46) s -> . EXIT
+    (29) pushid -> . ID
+    (23) iddim -> . pushid LPAREN ea RPAREN
+    (24) iddim -> . pushid LPAREN ea , ea RPAREN
+    (37) estif -> . IF
+    (47) estdo -> . DO
+
+    END             reduce using rule 38 (c2 -> el estthen est .)
+    ELSE            reduce using rule 38 (c2 -> el estthen est .)
+    ELSIF           reduce using rule 38 (c2 -> el estthen est .)
+    CALL            shift and go to state 27
+    READ            shift and go to state 31
+    PRINT           shift and go to state 32
+    DO              shift and go to state 34
+    EXIT            shift and go to state 36
+    ID              shift and go to state 28
+    IF              shift and go to state 37
+
+    s                              shift and go to state 42
+    pushid                         shift and go to state 29
+    iddim                          shift and go to state 30
+    estif                          shift and go to state 33
+    estdo                          shift and go to state 35
+
+state 129
+
+    (71) el -> el haceor eand .
+    (74) eand -> eand . haceand enot
+    (75) haceand -> . AND
+
+    THEN            reduce using rule 71 (el -> el haceor eand .)
+    OR              reduce using rule 71 (el -> el haceor eand .)
+    RPAREN          reduce using rule 71 (el -> el haceor eand .)
+    AND             shift and go to state 94
+
+    haceand                        shift and go to state 93
+
+state 130
+
+    (74) eand -> eand haceand enot .
+
+    AND             reduce using rule 74 (eand -> eand haceand enot .)
+    THEN            reduce using rule 74 (eand -> eand haceand enot .)
+    OR              reduce using rule 74 (eand -> eand haceand enot .)
+    RPAREN          reduce using rule 74 (eand -> eand haceand enot .)
+
+
+state 131
+
+    (79) er -> parenIZQ el parenDER .
+
+    AND             reduce using rule 79 (er -> parenIZQ el parenDER .)
+    THEN            reduce using rule 79 (er -> parenIZQ el parenDER .)
+    OR              reduce using rule 79 (er -> parenIZQ el parenDER .)
+    RPAREN          reduce using rule 79 (er -> parenIZQ el parenDER .)
+
+
+state 132
+
+    (69) parenDER -> RPAREN .
+
+    AND             reduce using rule 69 (parenDER -> RPAREN .)
+    THEN            reduce using rule 69 (parenDER -> RPAREN .)
+    OR              reduce using rule 69 (parenDER -> RPAREN .)
+    RPAREN          reduce using rule 69 (parenDER -> RPAREN .)
+    MULTIPLICACION  reduce using rule 69 (parenDER -> RPAREN .)
+    DIVISION        reduce using rule 69 (parenDER -> RPAREN .)
+    SUMA            reduce using rule 69 (parenDER -> RPAREN .)
+    RESTA           reduce using rule 69 (parenDER -> RPAREN .)
+    END             reduce using rule 69 (parenDER -> RPAREN .)
+    CALL            reduce using rule 69 (parenDER -> RPAREN .)
+    READ            reduce using rule 69 (parenDER -> RPAREN .)
+    PRINT           reduce using rule 69 (parenDER -> RPAREN .)
+    DO              reduce using rule 69 (parenDER -> RPAREN .)
+    EXIT            reduce using rule 69 (parenDER -> RPAREN .)
+    ID              reduce using rule 69 (parenDER -> RPAREN .)
+    IF              reduce using rule 69 (parenDER -> RPAREN .)
+    ELSE            reduce using rule 69 (parenDER -> RPAREN .)
+    ELSIF           reduce using rule 69 (parenDER -> RPAREN .)
+    ,               reduce using rule 69 (parenDER -> RPAREN .)
+
+
+state 133
+
+    (94) c5 -> c4 .
+
+    AND             reduce using rule 94 (c5 -> c4 .)
+    THEN            reduce using rule 94 (c5 -> c4 .)
+    OR              reduce using rule 94 (c5 -> c4 .)
+    RPAREN          reduce using rule 94 (c5 -> c4 .)
+
+
+state 134
+
+    (80) er -> c4 hacemenor c5 .
+
+    AND             reduce using rule 80 (er -> c4 hacemenor c5 .)
+    THEN            reduce using rule 80 (er -> c4 hacemenor c5 .)
+    OR              reduce using rule 80 (er -> c4 hacemenor c5 .)
+    RPAREN          reduce using rule 80 (er -> c4 hacemenor c5 .)
+
+
+state 135
+
+    (95) c5 -> pushcte .
+
+    AND             reduce using rule 95 (c5 -> pushcte .)
+    THEN            reduce using rule 95 (c5 -> pushcte .)
+    OR              reduce using rule 95 (c5 -> pushcte .)
+    RPAREN          reduce using rule 95 (c5 -> pushcte .)
+
+
+state 136
+
+    (82) er -> c4 hacemenorigual c5 .
+
+    AND             reduce using rule 82 (er -> c4 hacemenorigual c5 .)
+    THEN            reduce using rule 82 (er -> c4 hacemenorigual c5 .)
+    OR              reduce using rule 82 (er -> c4 hacemenorigual c5 .)
+    RPAREN          reduce using rule 82 (er -> c4 hacemenorigual c5 .)
+
+
+state 137
+
+    (84) er -> c4 hacemayor c5 .
+
+    AND             reduce using rule 84 (er -> c4 hacemayor c5 .)
+    THEN            reduce using rule 84 (er -> c4 hacemayor c5 .)
+    OR              reduce using rule 84 (er -> c4 hacemayor c5 .)
+    RPAREN          reduce using rule 84 (er -> c4 hacemayor c5 .)
+
+
+state 138
+
+    (86) er -> c4 hacemayorigual c5 .
+
+    AND             reduce using rule 86 (er -> c4 hacemayorigual c5 .)
+    THEN            reduce using rule 86 (er -> c4 hacemayorigual c5 .)
+    OR              reduce using rule 86 (er -> c4 hacemayorigual c5 .)
+    RPAREN          reduce using rule 86 (er -> c4 hacemayorigual c5 .)
+
+
+state 139
+
+    (88) er -> c4 haceigual c5 .
+
+    AND             reduce using rule 88 (er -> c4 haceigual c5 .)
+    THEN            reduce using rule 88 (er -> c4 haceigual c5 .)
+    OR              reduce using rule 88 (er -> c4 haceigual c5 .)
+    RPAREN          reduce using rule 88 (er -> c4 haceigual c5 .)
+
+
+state 140
+
+    (90) er -> c4 hacedesigual c5 .
+
+    AND             reduce using rule 90 (er -> c4 hacedesigual c5 .)
+    THEN            reduce using rule 90 (er -> c4 hacedesigual c5 .)
+    OR              reduce using rule 90 (er -> c4 hacedesigual c5 .)
+    RPAREN          reduce using rule 90 (er -> c4 hacedesigual c5 .)
+
+
+state 141
+
+    (49) cteid -> pushid .
+
+    ,               reduce using rule 49 (cteid -> pushid .)
+    CALL            reduce using rule 49 (cteid -> pushid .)
+    READ            reduce using rule 49 (cteid -> pushid .)
+    PRINT           reduce using rule 49 (cteid -> pushid .)
+    DO              reduce using rule 49 (cteid -> pushid .)
+    EXIT            reduce using rule 49 (cteid -> pushid .)
+    ID              reduce using rule 49 (cteid -> pushid .)
+    IF              reduce using rule 49 (cteid -> pushid .)
+
+
+state 142
+
+    (43) s -> DO pushid = first . , last , increment est END
+    (44) s -> DO pushid = first . , last est END
+
+    ,               shift and go to state 157
+
+
+state 143
+
+    (48) first -> cteid .
+
+    ,               reduce using rule 48 (first -> cteid .)
+
+
+state 144
+
+    (50) cteid -> pushcte .
+
+    ,               reduce using rule 50 (cteid -> pushcte .)
+    CALL            reduce using rule 50 (cteid -> pushcte .)
+    READ            reduce using rule 50 (cteid -> pushcte .)
+    PRINT           reduce using rule 50 (cteid -> pushcte .)
+    DO              reduce using rule 50 (cteid -> pushcte .)
+    EXIT            reduce using rule 50 (cteid -> pushcte .)
+    ID              reduce using rule 50 (cteid -> pushcte .)
+    IF              reduce using rule 50 (cteid -> pushcte .)
+
+
+state 145
+
+    (17) c1 -> c1 , ID LPAREN CTE , . CTE RPAREN
+
+    CTE             shift and go to state 158
+
+
+state 146
+
+    (15) c1 -> c1 , ID LPAREN CTE RPAREN .
+
+    ,               reduce using rule 15 (c1 -> c1 , ID LPAREN CTE RPAREN .)
+    INTEGER         reduce using rule 15 (c1 -> c1 , ID LPAREN CTE RPAREN .)
+    REAL            reduce using rule 15 (c1 -> c1 , ID LPAREN CTE RPAREN .)
+    SUBROUTINE      reduce using rule 15 (c1 -> c1 , ID LPAREN CTE RPAREN .)
+    BEGIN           reduce using rule 15 (c1 -> c1 , ID LPAREN CTE RPAREN .)
+
+
+state 147
+
+    (16) c1 -> ID LPAREN CTE , CTE RPAREN .
+
+    ,               reduce using rule 16 (c1 -> ID LPAREN CTE , CTE RPAREN .)
+    INTEGER         reduce using rule 16 (c1 -> ID LPAREN CTE , CTE RPAREN .)
+    REAL            reduce using rule 16 (c1 -> ID LPAREN CTE , CTE RPAREN .)
+    SUBROUTINE      reduce using rule 16 (c1 -> ID LPAREN CTE , CTE RPAREN .)
+    BEGIN           reduce using rule 16 (c1 -> ID LPAREN CTE , CTE RPAREN .)
+
+
+state 148
+
+    (54) ea -> ea hacesuma md .
+    (59) md -> md . hacemult exp
+    (61) md -> md . hacediv exp
+    (60) hacemult -> . MULTIPLICACION
+    (62) hacediv -> . DIVISION
+
+    SUMA            reduce using rule 54 (ea -> ea hacesuma md .)
+    RESTA           reduce using rule 54 (ea -> ea hacesuma md .)
+    END             reduce using rule 54 (ea -> ea hacesuma md .)
+    CALL            reduce using rule 54 (ea -> ea hacesuma md .)
+    READ            reduce using rule 54 (ea -> ea hacesuma md .)
+    PRINT           reduce using rule 54 (ea -> ea hacesuma md .)
+    DO              reduce using rule 54 (ea -> ea hacesuma md .)
+    EXIT            reduce using rule 54 (ea -> ea hacesuma md .)
+    ID              reduce using rule 54 (ea -> ea hacesuma md .)
+    IF              reduce using rule 54 (ea -> ea hacesuma md .)
+    ELSE            reduce using rule 54 (ea -> ea hacesuma md .)
+    ELSIF           reduce using rule 54 (ea -> ea hacesuma md .)
+    RPAREN          reduce using rule 54 (ea -> ea hacesuma md .)
+    ,               reduce using rule 54 (ea -> ea hacesuma md .)
+    MULTIPLICACION  shift and go to state 120
+    DIVISION        shift and go to state 121
+
+    hacemult                       shift and go to state 118
+    hacediv                        shift and go to state 119
+
+state 149
+
+    (56) ea -> ea haceresta md .
+    (59) md -> md . hacemult exp
+    (61) md -> md . hacediv exp
+    (60) hacemult -> . MULTIPLICACION
+    (62) hacediv -> . DIVISION
+
+    SUMA            reduce using rule 56 (ea -> ea haceresta md .)
+    RESTA           reduce using rule 56 (ea -> ea haceresta md .)
+    END             reduce using rule 56 (ea -> ea haceresta md .)
+    CALL            reduce using rule 56 (ea -> ea haceresta md .)
+    READ            reduce using rule 56 (ea -> ea haceresta md .)
+    PRINT           reduce using rule 56 (ea -> ea haceresta md .)
+    DO              reduce using rule 56 (ea -> ea haceresta md .)
+    EXIT            reduce using rule 56 (ea -> ea haceresta md .)
+    ID              reduce using rule 56 (ea -> ea haceresta md .)
+    IF              reduce using rule 56 (ea -> ea haceresta md .)
+    ELSE            reduce using rule 56 (ea -> ea haceresta md .)
+    ELSIF           reduce using rule 56 (ea -> ea haceresta md .)
+    RPAREN          reduce using rule 56 (ea -> ea haceresta md .)
+    ,               reduce using rule 56 (ea -> ea haceresta md .)
+    MULTIPLICACION  shift and go to state 120
+    DIVISION        shift and go to state 121
+
+    hacemult                       shift and go to state 118
+    hacediv                        shift and go to state 119
+
+state 150
+
+    (59) md -> md hacemult exp .
+
+    MULTIPLICACION  reduce using rule 59 (md -> md hacemult exp .)
+    DIVISION        reduce using rule 59 (md -> md hacemult exp .)
+    SUMA            reduce using rule 59 (md -> md hacemult exp .)
+    RESTA           reduce using rule 59 (md -> md hacemult exp .)
+    END             reduce using rule 59 (md -> md hacemult exp .)
+    CALL            reduce using rule 59 (md -> md hacemult exp .)
+    READ            reduce using rule 59 (md -> md hacemult exp .)
+    PRINT           reduce using rule 59 (md -> md hacemult exp .)
+    DO              reduce using rule 59 (md -> md hacemult exp .)
+    EXIT            reduce using rule 59 (md -> md hacemult exp .)
+    ID              reduce using rule 59 (md -> md hacemult exp .)
+    IF              reduce using rule 59 (md -> md hacemult exp .)
+    ELSE            reduce using rule 59 (md -> md hacemult exp .)
+    ELSIF           reduce using rule 59 (md -> md hacemult exp .)
+    RPAREN          reduce using rule 59 (md -> md hacemult exp .)
+    ,               reduce using rule 59 (md -> md hacemult exp .)
+
+
+state 151
+
+    (61) md -> md hacediv exp .
+
+    MULTIPLICACION  reduce using rule 61 (md -> md hacediv exp .)
+    DIVISION        reduce using rule 61 (md -> md hacediv exp .)
+    SUMA            reduce using rule 61 (md -> md hacediv exp .)
+    RESTA           reduce using rule 61 (md -> md hacediv exp .)
+    END             reduce using rule 61 (md -> md hacediv exp .)
+    CALL            reduce using rule 61 (md -> md hacediv exp .)
+    READ            reduce using rule 61 (md -> md hacediv exp .)
+    PRINT           reduce using rule 61 (md -> md hacediv exp .)
+    DO              reduce using rule 61 (md -> md hacediv exp .)
+    EXIT            reduce using rule 61 (md -> md hacediv exp .)
+    ID              reduce using rule 61 (md -> md hacediv exp .)
+    IF              reduce using rule 61 (md -> md hacediv exp .)
+    ELSE            reduce using rule 61 (md -> md hacediv exp .)
+    ELSIF           reduce using rule 61 (md -> md hacediv exp .)
+    RPAREN          reduce using rule 61 (md -> md hacediv exp .)
+    ,               reduce using rule 61 (md -> md hacediv exp .)
+
+
+state 152
+
+    (67) exp -> parenIZQ ea parenDER .
+
+    MULTIPLICACION  reduce using rule 67 (exp -> parenIZQ ea parenDER .)
+    DIVISION        reduce using rule 67 (exp -> parenIZQ ea parenDER .)
+    SUMA            reduce using rule 67 (exp -> parenIZQ ea parenDER .)
+    RESTA           reduce using rule 67 (exp -> parenIZQ ea parenDER .)
+    END             reduce using rule 67 (exp -> parenIZQ ea parenDER .)
+    CALL            reduce using rule 67 (exp -> parenIZQ ea parenDER .)
+    READ            reduce using rule 67 (exp -> parenIZQ ea parenDER .)
+    PRINT           reduce using rule 67 (exp -> parenIZQ ea parenDER .)
+    DO              reduce using rule 67 (exp -> parenIZQ ea parenDER .)
+    EXIT            reduce using rule 67 (exp -> parenIZQ ea parenDER .)
+    ID              reduce using rule 67 (exp -> parenIZQ ea parenDER .)
+    IF              reduce using rule 67 (exp -> parenIZQ ea parenDER .)
+    ELSE            reduce using rule 67 (exp -> parenIZQ ea parenDER .)
+    ELSIF           reduce using rule 67 (exp -> parenIZQ ea parenDER .)
+    RPAREN          reduce using rule 67 (exp -> parenIZQ ea parenDER .)
+    ,               reduce using rule 67 (exp -> parenIZQ ea parenDER .)
+
+
+state 153
+
+    (24) iddim -> pushid LPAREN ea , ea . RPAREN
+    (54) ea -> ea . hacesuma md
+    (56) ea -> ea . haceresta md
+    (55) hacesuma -> . SUMA
+    (57) haceresta -> . RESTA
+
+    RPAREN          shift and go to state 159
+    SUMA            shift and go to state 116
+    RESTA           shift and go to state 117
+
+    hacesuma                       shift and go to state 114
+    haceresta                      shift and go to state 115
+
+state 154
+
+    (25) printiddim -> pushid LPAREN ea . RPAREN
+    (26) printiddim -> pushid LPAREN ea . , ea RPAREN
+    (54) ea -> ea . hacesuma md
+    (56) ea -> ea . haceresta md
+    (55) hacesuma -> . SUMA
+    (57) haceresta -> . RESTA
+
+    RPAREN          shift and go to state 160
+    ,               shift and go to state 161
+    SUMA            shift and go to state 116
+    RESTA           shift and go to state 117
+
+    hacesuma                       shift and go to state 114
+    haceresta                      shift and go to state 115
+
+state 155
+
+    (35) s -> estif c2 estelse est END .
+
+    END             reduce using rule 35 (s -> estif c2 estelse est END .)
+    CALL            reduce using rule 35 (s -> estif c2 estelse est END .)
+    READ            reduce using rule 35 (s -> estif c2 estelse est END .)
+    PRINT           reduce using rule 35 (s -> estif c2 estelse est END .)
+    DO              reduce using rule 35 (s -> estif c2 estelse est END .)
+    EXIT            reduce using rule 35 (s -> estif c2 estelse est END .)
+    ID              reduce using rule 35 (s -> estif c2 estelse est END .)
+    IF              reduce using rule 35 (s -> estif c2 estelse est END .)
+    ELSE            reduce using rule 35 (s -> estif c2 estelse est END .)
+    ELSIF           reduce using rule 35 (s -> estif c2 estelse est END .)
+
+
+state 156
+
+    (39) c2 -> c2 estelsif el estthen . est
+    (21) est -> . s
+    (22) est -> . est s
+    (20) s -> . CALL ID LPAREN RPAREN
+    (27) s -> . pushid = ea
+    (28) s -> . iddim = ea
+    (30) s -> . READ FLECHA ID
+    (31) s -> . PRINT FLECHA TEXT
+    (32) s -> . PRINT FLECHA checkid
+    (35) s -> . estif c2 estelse est END
+    (36) s -> . estif c2 END
+    (43) s -> . DO pushid = first , last , increment est END
+    (44) s -> . DO pushid = first , last est END
+    (45) s -> . estdo est END
+    (46) s -> . EXIT
+    (29) pushid -> . ID
+    (23) iddim -> . pushid LPAREN ea RPAREN
+    (24) iddim -> . pushid LPAREN ea , ea RPAREN
+    (37) estif -> . IF
+    (47) estdo -> . DO
+
+    CALL            shift and go to state 27
+    READ            shift and go to state 31
+    PRINT           shift and go to state 32
+    DO              shift and go to state 34
+    EXIT            shift and go to state 36
+    ID              shift and go to state 28
+    IF              shift and go to state 37
+
+    est                            shift and go to state 162
+    s                              shift and go to state 26
+    pushid                         shift and go to state 29
+    iddim                          shift and go to state 30
+    estif                          shift and go to state 33
+    estdo                          shift and go to state 35
+
+state 157
+
+    (43) s -> DO pushid = first , . last , increment est END
+    (44) s -> DO pushid = first , . last est END
+    (51) last -> . cteid
+    (49) cteid -> . pushid
+    (50) cteid -> . pushcte
+    (29) pushid -> . ID
+    (66) pushcte -> . CTE
+
+    ID              shift and go to state 28
+    CTE             shift and go to state 75
+
+    pushid                         shift and go to state 141
+    last                           shift and go to state 163
+    cteid                          shift and go to state 164
+    pushcte                        shift and go to state 144
+
+state 158
+
+    (17) c1 -> c1 , ID LPAREN CTE , CTE . RPAREN
+
+    RPAREN          shift and go to state 165
+
+
+state 159
+
+    (24) iddim -> pushid LPAREN ea , ea RPAREN .
+
+    =               reduce using rule 24 (iddim -> pushid LPAREN ea , ea RPAREN .)
+    MENOR           reduce using rule 24 (iddim -> pushid LPAREN ea , ea RPAREN .)
+    MENOR_IGUAL     reduce using rule 24 (iddim -> pushid LPAREN ea , ea RPAREN .)
+    MAYOR           reduce using rule 24 (iddim -> pushid LPAREN ea , ea RPAREN .)
+    MAYOR_IGUAL     reduce using rule 24 (iddim -> pushid LPAREN ea , ea RPAREN .)
+    IGUAL           reduce using rule 24 (iddim -> pushid LPAREN ea , ea RPAREN .)
+    DESIGUAL        reduce using rule 24 (iddim -> pushid LPAREN ea , ea RPAREN .)
+    MULTIPLICACION  reduce using rule 24 (iddim -> pushid LPAREN ea , ea RPAREN .)
+    DIVISION        reduce using rule 24 (iddim -> pushid LPAREN ea , ea RPAREN .)
+    SUMA            reduce using rule 24 (iddim -> pushid LPAREN ea , ea RPAREN .)
+    RESTA           reduce using rule 24 (iddim -> pushid LPAREN ea , ea RPAREN .)
+    END             reduce using rule 24 (iddim -> pushid LPAREN ea , ea RPAREN .)
+    CALL            reduce using rule 24 (iddim -> pushid LPAREN ea , ea RPAREN .)
+    READ            reduce using rule 24 (iddim -> pushid LPAREN ea , ea RPAREN .)
+    PRINT           reduce using rule 24 (iddim -> pushid LPAREN ea , ea RPAREN .)
+    DO              reduce using rule 24 (iddim -> pushid LPAREN ea , ea RPAREN .)
+    EXIT            reduce using rule 24 (iddim -> pushid LPAREN ea , ea RPAREN .)
+    ID              reduce using rule 24 (iddim -> pushid LPAREN ea , ea RPAREN .)
+    IF              reduce using rule 24 (iddim -> pushid LPAREN ea , ea RPAREN .)
+    ELSE            reduce using rule 24 (iddim -> pushid LPAREN ea , ea RPAREN .)
+    ELSIF           reduce using rule 24 (iddim -> pushid LPAREN ea , ea RPAREN .)
+    RPAREN          reduce using rule 24 (iddim -> pushid LPAREN ea , ea RPAREN .)
+    ,               reduce using rule 24 (iddim -> pushid LPAREN ea , ea RPAREN .)
+    AND             reduce using rule 24 (iddim -> pushid LPAREN ea , ea RPAREN .)
+    THEN            reduce using rule 24 (iddim -> pushid LPAREN ea , ea RPAREN .)
+    OR              reduce using rule 24 (iddim -> pushid LPAREN ea , ea RPAREN .)
+
+
+state 160
+
+    (25) printiddim -> pushid LPAREN ea RPAREN .
+
+    END             reduce using rule 25 (printiddim -> pushid LPAREN ea RPAREN .)
+    CALL            reduce using rule 25 (printiddim -> pushid LPAREN ea RPAREN .)
+    READ            reduce using rule 25 (printiddim -> pushid LPAREN ea RPAREN .)
+    PRINT           reduce using rule 25 (printiddim -> pushid LPAREN ea RPAREN .)
+    DO              reduce using rule 25 (printiddim -> pushid LPAREN ea RPAREN .)
+    EXIT            reduce using rule 25 (printiddim -> pushid LPAREN ea RPAREN .)
+    ID              reduce using rule 25 (printiddim -> pushid LPAREN ea RPAREN .)
+    IF              reduce using rule 25 (printiddim -> pushid LPAREN ea RPAREN .)
+    ELSE            reduce using rule 25 (printiddim -> pushid LPAREN ea RPAREN .)
+    ELSIF           reduce using rule 25 (printiddim -> pushid LPAREN ea RPAREN .)
+
+
+state 161
+
+    (26) printiddim -> pushid LPAREN ea , . ea RPAREN
+    (53) ea -> . md
+    (54) ea -> . ea hacesuma md
+    (56) ea -> . ea haceresta md
+    (58) md -> . exp
+    (59) md -> . md hacemult exp
+    (61) md -> . md hacediv exp
+    (63) exp -> . pushid
+    (64) exp -> . iddim
+    (65) exp -> . pushcte
+    (67) exp -> . parenIZQ ea parenDER
+    (29) pushid -> . ID
+    (23) iddim -> . pushid LPAREN ea RPAREN
+    (24) iddim -> . pushid LPAREN ea , ea RPAREN
+    (66) pushcte -> . CTE
+    (68) parenIZQ -> . LPAREN
+
+    ID              shift and go to state 28
+    CTE             shift and go to state 75
+    LPAREN          shift and go to state 59
+
+    pushid                         shift and go to state 68
+    ea                             shift and go to state 166
+    md                             shift and go to state 70
+    exp                            shift and go to state 71
+    iddim                          shift and go to state 72
+    pushcte                        shift and go to state 73
+    parenIZQ                       shift and go to state 74
+
+state 162
+
+    (39) c2 -> c2 estelsif el estthen est .
+    (22) est -> est . s
+    (20) s -> . CALL ID LPAREN RPAREN
+    (27) s -> . pushid = ea
+    (28) s -> . iddim = ea
+    (30) s -> . READ FLECHA ID
+    (31) s -> . PRINT FLECHA TEXT
+    (32) s -> . PRINT FLECHA checkid
+    (35) s -> . estif c2 estelse est END
+    (36) s -> . estif c2 END
+    (43) s -> . DO pushid = first , last , increment est END
+    (44) s -> . DO pushid = first , last est END
+    (45) s -> . estdo est END
+    (46) s -> . EXIT
+    (29) pushid -> . ID
+    (23) iddim -> . pushid LPAREN ea RPAREN
+    (24) iddim -> . pushid LPAREN ea , ea RPAREN
+    (37) estif -> . IF
+    (47) estdo -> . DO
+
+    END             reduce using rule 39 (c2 -> c2 estelsif el estthen est .)
+    ELSE            reduce using rule 39 (c2 -> c2 estelsif el estthen est .)
+    ELSIF           reduce using rule 39 (c2 -> c2 estelsif el estthen est .)
+    CALL            shift and go to state 27
+    READ            shift and go to state 31
+    PRINT           shift and go to state 32
+    DO              shift and go to state 34
+    EXIT            shift and go to state 36
+    ID              shift and go to state 28
+    IF              shift and go to state 37
+
+    s                              shift and go to state 42
+    pushid                         shift and go to state 29
+    iddim                          shift and go to state 30
+    estif                          shift and go to state 33
+    estdo                          shift and go to state 35
+
+state 163
+
+    (43) s -> DO pushid = first , last . , increment est END
+    (44) s -> DO pushid = first , last . est END
+    (21) est -> . s
+    (22) est -> . est s
+    (20) s -> . CALL ID LPAREN RPAREN
+    (27) s -> . pushid = ea
+    (28) s -> . iddim = ea
+    (30) s -> . READ FLECHA ID
+    (31) s -> . PRINT FLECHA TEXT
+    (32) s -> . PRINT FLECHA checkid
+    (35) s -> . estif c2 estelse est END
+    (36) s -> . estif c2 END
+    (43) s -> . DO pushid = first , last , increment est END
+    (44) s -> . DO pushid = first , last est END
+    (45) s -> . estdo est END
+    (46) s -> . EXIT
+    (29) pushid -> . ID
+    (23) iddim -> . pushid LPAREN ea RPAREN
+    (24) iddim -> . pushid LPAREN ea , ea RPAREN
+    (37) estif -> . IF
+    (47) estdo -> . DO
+
+    ,               shift and go to state 167
+    CALL            shift and go to state 27
+    READ            shift and go to state 31
+    PRINT           shift and go to state 32
+    DO              shift and go to state 34
+    EXIT            shift and go to state 36
+    ID              shift and go to state 28
+    IF              shift and go to state 37
+
+    pushid                         shift and go to state 29
+    est                            shift and go to state 168
+    s                              shift and go to state 26
+    iddim                          shift and go to state 30
+    estif                          shift and go to state 33
+    estdo                          shift and go to state 35
+
+state 164
+
+    (51) last -> cteid .
+
+    ,               reduce using rule 51 (last -> cteid .)
+    CALL            reduce using rule 51 (last -> cteid .)
+    READ            reduce using rule 51 (last -> cteid .)
+    PRINT           reduce using rule 51 (last -> cteid .)
+    DO              reduce using rule 51 (last -> cteid .)
+    EXIT            reduce using rule 51 (last -> cteid .)
+    ID              reduce using rule 51 (last -> cteid .)
+    IF              reduce using rule 51 (last -> cteid .)
+
+
+state 165
+
+    (17) c1 -> c1 , ID LPAREN CTE , CTE RPAREN .
+
+    ,               reduce using rule 17 (c1 -> c1 , ID LPAREN CTE , CTE RPAREN .)
+    INTEGER         reduce using rule 17 (c1 -> c1 , ID LPAREN CTE , CTE RPAREN .)
+    REAL            reduce using rule 17 (c1 -> c1 , ID LPAREN CTE , CTE RPAREN .)
+    SUBROUTINE      reduce using rule 17 (c1 -> c1 , ID LPAREN CTE , CTE RPAREN .)
+    BEGIN           reduce using rule 17 (c1 -> c1 , ID LPAREN CTE , CTE RPAREN .)
+
+
+state 166
+
+    (26) printiddim -> pushid LPAREN ea , ea . RPAREN
+    (54) ea -> ea . hacesuma md
+    (56) ea -> ea . haceresta md
+    (55) hacesuma -> . SUMA
+    (57) haceresta -> . RESTA
+
+    RPAREN          shift and go to state 169
+    SUMA            shift and go to state 116
+    RESTA           shift and go to state 117
+
+    hacesuma                       shift and go to state 114
+    haceresta                      shift and go to state 115
+
+state 167
+
+    (43) s -> DO pushid = first , last , . increment est END
+    (52) increment -> . pushcte
+    (66) pushcte -> . CTE
+
+    CTE             shift and go to state 75
+
+    increment                      shift and go to state 170
+    pushcte                        shift and go to state 171
+
+state 168
+
+    (44) s -> DO pushid = first , last est . END
+    (22) est -> est . s
+    (20) s -> . CALL ID LPAREN RPAREN
+    (27) s -> . pushid = ea
+    (28) s -> . iddim = ea
+    (30) s -> . READ FLECHA ID
+    (31) s -> . PRINT FLECHA TEXT
+    (32) s -> . PRINT FLECHA checkid
+    (35) s -> . estif c2 estelse est END
+    (36) s -> . estif c2 END
+    (43) s -> . DO pushid = first , last , increment est END
+    (44) s -> . DO pushid = first , last est END
+    (45) s -> . estdo est END
+    (46) s -> . EXIT
+    (29) pushid -> . ID
+    (23) iddim -> . pushid LPAREN ea RPAREN
+    (24) iddim -> . pushid LPAREN ea , ea RPAREN
+    (37) estif -> . IF
+    (47) estdo -> . DO
+
+    END             shift and go to state 172
+    CALL            shift and go to state 27
+    READ            shift and go to state 31
+    PRINT           shift and go to state 32
+    DO              shift and go to state 34
+    EXIT            shift and go to state 36
+    ID              shift and go to state 28
+    IF              shift and go to state 37
+
+    pushid                         shift and go to state 29
+    s                              shift and go to state 42
+    iddim                          shift and go to state 30
+    estif                          shift and go to state 33
+    estdo                          shift and go to state 35
+
+state 169
+
+    (26) printiddim -> pushid LPAREN ea , ea RPAREN .
+
+    END             reduce using rule 26 (printiddim -> pushid LPAREN ea , ea RPAREN .)
+    CALL            reduce using rule 26 (printiddim -> pushid LPAREN ea , ea RPAREN .)
+    READ            reduce using rule 26 (printiddim -> pushid LPAREN ea , ea RPAREN .)
+    PRINT           reduce using rule 26 (printiddim -> pushid LPAREN ea , ea RPAREN .)
+    DO              reduce using rule 26 (printiddim -> pushid LPAREN ea , ea RPAREN .)
+    EXIT            reduce using rule 26 (printiddim -> pushid LPAREN ea , ea RPAREN .)
+    ID              reduce using rule 26 (printiddim -> pushid LPAREN ea , ea RPAREN .)
+    IF              reduce using rule 26 (printiddim -> pushid LPAREN ea , ea RPAREN .)
+    ELSE            reduce using rule 26 (printiddim -> pushid LPAREN ea , ea RPAREN .)
+    ELSIF           reduce using rule 26 (printiddim -> pushid LPAREN ea , ea RPAREN .)
+
+
+state 170
+
+    (43) s -> DO pushid = first , last , increment . est END
+    (21) est -> . s
+    (22) est -> . est s
+    (20) s -> . CALL ID LPAREN RPAREN
+    (27) s -> . pushid = ea
+    (28) s -> . iddim = ea
+    (30) s -> . READ FLECHA ID
+    (31) s -> . PRINT FLECHA TEXT
+    (32) s -> . PRINT FLECHA checkid
+    (35) s -> . estif c2 estelse est END
+    (36) s -> . estif c2 END
+    (43) s -> . DO pushid = first , last , increment est END
+    (44) s -> . DO pushid = first , last est END
+    (45) s -> . estdo est END
+    (46) s -> . EXIT
+    (29) pushid -> . ID
+    (23) iddim -> . pushid LPAREN ea RPAREN
+    (24) iddim -> . pushid LPAREN ea , ea RPAREN
+    (37) estif -> . IF
+    (47) estdo -> . DO
+
+    CALL            shift and go to state 27
+    READ            shift and go to state 31
+    PRINT           shift and go to state 32
+    DO              shift and go to state 34
+    EXIT            shift and go to state 36
+    ID              shift and go to state 28
+    IF              shift and go to state 37
+
+    pushid                         shift and go to state 29
+    est                            shift and go to state 173
+    s                              shift and go to state 26
+    iddim                          shift and go to state 30
+    estif                          shift and go to state 33
+    estdo                          shift and go to state 35
+
+state 171
+
+    (52) increment -> pushcte .
+
+    CALL            reduce using rule 52 (increment -> pushcte .)
+    READ            reduce using rule 52 (increment -> pushcte .)
+    PRINT           reduce using rule 52 (increment -> pushcte .)
+    DO              reduce using rule 52 (increment -> pushcte .)
+    EXIT            reduce using rule 52 (increment -> pushcte .)
+    ID              reduce using rule 52 (increment -> pushcte .)
+    IF              reduce using rule 52 (increment -> pushcte .)
+
+
+state 172
+
+    (44) s -> DO pushid = first , last est END .
+
+    END             reduce using rule 44 (s -> DO pushid = first , last est END .)
+    CALL            reduce using rule 44 (s -> DO pushid = first , last est END .)
+    READ            reduce using rule 44 (s -> DO pushid = first , last est END .)
+    PRINT           reduce using rule 44 (s -> DO pushid = first , last est END .)
+    DO              reduce using rule 44 (s -> DO pushid = first , last est END .)
+    EXIT            reduce using rule 44 (s -> DO pushid = first , last est END .)
+    ID              reduce using rule 44 (s -> DO pushid = first , last est END .)
+    IF              reduce using rule 44 (s -> DO pushid = first , last est END .)
+    ELSE            reduce using rule 44 (s -> DO pushid = first , last est END .)
+    ELSIF           reduce using rule 44 (s -> DO pushid = first , last est END .)
+
+
+state 173
+
+    (43) s -> DO pushid = first , last , increment est . END
+    (22) est -> est . s
+    (20) s -> . CALL ID LPAREN RPAREN
+    (27) s -> . pushid = ea
+    (28) s -> . iddim = ea
+    (30) s -> . READ FLECHA ID
+    (31) s -> . PRINT FLECHA TEXT
+    (32) s -> . PRINT FLECHA checkid
+    (35) s -> . estif c2 estelse est END
+    (36) s -> . estif c2 END
+    (43) s -> . DO pushid = first , last , increment est END
+    (44) s -> . DO pushid = first , last est END
+    (45) s -> . estdo est END
+    (46) s -> . EXIT
+    (29) pushid -> . ID
+    (23) iddim -> . pushid LPAREN ea RPAREN
+    (24) iddim -> . pushid LPAREN ea , ea RPAREN
+    (37) estif -> . IF
+    (47) estdo -> . DO
+
+    END             shift and go to state 174
+    CALL            shift and go to state 27
+    READ            shift and go to state 31
+    PRINT           shift and go to state 32
+    DO              shift and go to state 34
+    EXIT            shift and go to state 36
+    ID              shift and go to state 28
+    IF              shift and go to state 37
+
+    pushid                         shift and go to state 29
+    s                              shift and go to state 42
+    iddim                          shift and go to state 30
+    estif                          shift and go to state 33
+    estdo                          shift and go to state 35
+
+state 174
+
+    (43) s -> DO pushid = first , last , increment est END .
+
+    END             reduce using rule 43 (s -> DO pushid = first , last , increment est END .)
+    CALL            reduce using rule 43 (s -> DO pushid = first , last , increment est END .)
+    READ            reduce using rule 43 (s -> DO pushid = first , last , increment est END .)
+    PRINT           reduce using rule 43 (s -> DO pushid = first , last , increment est END .)
+    DO              reduce using rule 43 (s -> DO pushid = first , last , increment est END .)
+    EXIT            reduce using rule 43 (s -> DO pushid = first , last , increment est END .)
+    ID              reduce using rule 43 (s -> DO pushid = first , last , increment est END .)
+    IF              reduce using rule 43 (s -> DO pushid = first , last , increment est END .)
+    ELSE            reduce using rule 43 (s -> DO pushid = first , last , increment est END .)
+    ELSIF           reduce using rule 43 (s -> DO pushid = first , last , increment est END .)
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for SUBROUTINE in state 5 resolved as shift
+WARNING: shift/reduce conflict for ID in state 34 resolved as shift
